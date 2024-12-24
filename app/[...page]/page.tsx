@@ -12,7 +12,6 @@ interface PageProps {
 export default async function Page(props: PageProps) {
   const builderModelName = "page";
   
-  // Ensure params are available before using them
   const urlPath = Array.isArray(props.params?.page) 
     ? `/${props.params.page.join('/')}` 
     : '/';
