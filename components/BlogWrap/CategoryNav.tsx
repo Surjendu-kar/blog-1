@@ -29,18 +29,30 @@ const CategoryNav = ({
         ))}
       </ul>
 
-      {/* Search bar */}
       <div className="relative flex items-center">
+        {/* Search icon */}
         <div className="absolute left-3">
-          <Image src={SearchIcon} alt="Search" className="w-4 h-4" />
+          <Image
+            src={SearchIcon}
+            alt="Search"
+            className="w-4 h-4 cursor-pointer"
+          />
         </div>
+
+        {/* Search bar */}
         <input
           type="search"
           placeholder="Search..."
           className="pl-10 pr-12 py-2 rounded-md border border-[#00C7BE] focus:outline-none focus:border-[#00C7BE] w-64"
         />
+
+        {/* Filter icon */}
         <div className="absolute right-3">
-          <Image src={FilterIcon} alt="Filter" className="w-4 h-4" />
+          <Image
+            src={FilterIcon}
+            alt="Filter"
+            className="w-4 h-4 cursor-pointer"
+          />
         </div>
       </div>
     </nav>
