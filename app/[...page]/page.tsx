@@ -4,16 +4,17 @@ import { RenderBuilderContent } from "../../components/builder";
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
 interface PageProps {
-  params: {
+  params: Promise<{
     page: string[];
-  };
+  }>;
 }
 
-export default async function Page(props: PageProps) {
+export default async function Page({ params }: PageProps) {
   const builderModelName = "page";
   
-  const urlPath = Array.isArray(props.params?.page) 
-    ? `/${props.params.page.join('/')}` 
+  const resolvedParams = await params;
+  const urlPath = Array.isArray(resolvedParams?.page) 
+    ? `/${resolvedParams.page.join('/')}` 
     : '/';
 
   const content = await builder
