@@ -3,7 +3,7 @@ import Image from "next/image";
 
 type CardData = {
   image: StaticImageData;
-  category: "News" | "Insights" | "Trends";
+  category: "News" | "Insights" | "Trends" | "Healthcare" | "Innovation";
   readTime: string;
   title: string;
   description: string;
@@ -17,14 +17,14 @@ const CustomCard: React.FC<CardData> = ({
   description,
 }) => {
   return (
-    <div className="flex flex-col gap-4  rounded-lg bg-white shadow-sm">
+    <div className="flex flex-col gap-4  rounded-lg bg-white ">
       {/* Card Image */}
       <div className="relative h-48 rounded-lg overflow-hidden">
         <Image src={image} alt={title} className="object-cover" fill />
       </div>
 
       {/* Content Container */}
-      <div className="flex flex-col gap-3 px-4 pb-4">
+      <div className="flex flex-col gap-3 px-3 pb-4">
         {/* Category and Read Time */}
         <div className="flex items-center gap-4">
           <span className="bg-[#00C7BE] text-white text-xs px-3 py-1 rounded-sm">

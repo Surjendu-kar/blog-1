@@ -1,10 +1,11 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
 import BlogWrap from "./components/BlogWrap/BlogWrap";
+import CaseStudy from "./components/Feature Section/CaseStudy";
 import Counter from "./components/Counter/Counter";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import InsightUpdate from "./components/Feature/InsightUpdate";
+import InsightUpdate from "./components/Feature Section/InsightUpdate";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -36,4 +37,8 @@ Builder.registerComponent(Counter, {
       type: "number",
     },
   ],
+});
+
+Builder.registerComponent(CaseStudy, {
+  name: "CaseStudy",
 });

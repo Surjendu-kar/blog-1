@@ -1,8 +1,17 @@
-import CustomCard from "./CustomCard";
 import DevImg from "@/public/feature-img/dev.jpg";
+import CustomCard from "../CustomCard/CustomCard";
+import { StaticImageData } from "next/image";
+
+type InsightData = {
+  image: StaticImageData;
+  category: "News" | "Insights" | "Trends" | "Healthcare" | "Innovation";
+  readTime: string;
+  title: string;
+  description: string;
+};
 
 const InsightUpdate = () => {
-  const insightData = [
+  const insightData: InsightData[] = [
     {
       image: DevImg,
       category: "News",
@@ -30,7 +39,6 @@ const InsightUpdate = () => {
   ] as const;
 
   return (
-    // <div className="p-20 bg-[#F1F1F3]">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {insightData.map((data, index) => (
         <CustomCard
@@ -43,7 +51,6 @@ const InsightUpdate = () => {
         />
       ))}
     </div>
-    // </div>
   );
 };
 
