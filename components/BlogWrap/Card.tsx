@@ -9,7 +9,6 @@ interface CardProps {
   authorName: string;
   tag: string;
   readTime: string;
-  attributes: any;
 }
 
 const Card: FC<CardProps> = ({
@@ -20,7 +19,6 @@ const Card: FC<CardProps> = ({
   authorName,
   tag,
   readTime,
-  attributes = {},
 }) => {
   const isExternalUrl = (url: string) => {
     try {
@@ -32,7 +30,7 @@ const Card: FC<CardProps> = ({
   };
 
   return (
-    <div className="rounded overflow-hidden w-96" {...attributes}>
+    <div className="rounded overflow-hidden w-96">
       {/* Blog image */}
       <div className="relative w-full h-48">
         <Image
