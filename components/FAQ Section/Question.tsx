@@ -59,7 +59,7 @@ export default function Question() {
               }`}
             >
               <div className="overflow-hidden">
-                <div className="px-4 pb-4 text-sm text-gray-600">
+                <div className="px-4 pb-4 text-sm text-[#B3B3B3]">
                   {item.description}
                 </div>
               </div>
