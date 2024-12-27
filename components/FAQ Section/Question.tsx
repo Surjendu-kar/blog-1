@@ -7,7 +7,7 @@ interface Data {
   description: string;
 }
 
-export default function AnotherPage() {
+export default function Question() {
   const [data, setData] = useState<Data[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 

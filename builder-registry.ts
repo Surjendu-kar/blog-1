@@ -6,6 +6,7 @@ import CaseStudyCard from "./components/Feature Section/CaseStudyCard";
 import CategoryNav from "./components/BlogWrap/CategoryNav";
 import InsightUpdateCard from "./components/Feature Section/InsightUpdateCard";
 import Pagination from "./components/BlogWrap/Pagination";
+import Question from "./components/FAQ Section/Question";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -74,4 +75,8 @@ Builder.registerComponent(InsightUpdateCard, {
 
 Builder.registerComponent(CaseStudyCard, {
   name: "CaseStudyCard",
+});
+
+Builder.registerComponent(Question, {
+  name: "Question",
 });
