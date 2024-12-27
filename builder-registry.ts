@@ -4,6 +4,7 @@ import BlogCard from "./components/BlogWrap/BlogCard";
 import Card from "./components/BlogWrap/Card";
 import CaseStudyCard from "./components/Feature Section/CaseStudyCard";
 import CategoryNav from "./components/BlogWrap/CategoryNav";
+import Contact from "./components/Contact/Contact";
 import InsightUpdateCard from "./components/Feature Section/InsightUpdateCard";
 import Pagination from "./components/BlogWrap/Pagination";
 import Question from "./components/FAQ Section/Question";
@@ -79,4 +80,8 @@ Builder.registerComponent(CaseStudyCard, {
 
 Builder.registerComponent(Question, {
   name: "Question",
+});
+
+Builder.registerComponent(Contact, {
+  name: "Contact",
 });
