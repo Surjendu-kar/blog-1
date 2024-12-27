@@ -12,13 +12,13 @@ interface InsightCard {
   link: string;
 }
 
-const CustomCard = () => {
+const CaseStudyCard = () => {
   const [cards, setCards] = useState<InsightCard[]>([]);
 
   useEffect(() => {
     async function fetchCards() {
       builder.init("d0b1ab2c80db47c9afbc018dd30f96d7");
-      const builderData = await builder.getAll("insight-update-card");
+      const builderData = await builder.getAll("case-study-card");
 
       try {
         const transformedCards = builderData.map((item) => ({
@@ -116,4 +116,4 @@ const CustomCard = () => {
   );
 };
 
-export default CustomCard;
+export default CaseStudyCard;

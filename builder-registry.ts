@@ -2,23 +2,15 @@
 import { builder, Builder } from "@builder.io/react";
 import BlogCard from "./components/BlogWrap/BlogCard";
 import Card from "./components/BlogWrap/Card";
-import CaseStudy from "./components/Feature Section/CaseStudy";
+import CaseStudyCard from "./components/Feature Section/CaseStudyCard";
 import CategoryNav from "./components/BlogWrap/CategoryNav";
-import InsightUpdate from "./components/Feature Section/InsightUpdate";
+import InsightUpdateCard from "./components/Feature Section/InsightUpdateCard";
 import Pagination from "./components/BlogWrap/Pagination";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
 Builder.registerComponent(Builder, {
   name: "Builder",
-});
-
-Builder.registerComponent(InsightUpdate, {
-  name: "InsightUpdate",
-});
-
-Builder.registerComponent(CaseStudy, {
-  name: "CaseStudy",
 });
 
 Builder.registerComponent(BlogCard, {
@@ -74,4 +66,12 @@ Builder.registerComponent(Card, {
       defaultValue: "12 mins",
     },
   ],
+});
+
+Builder.registerComponent(InsightUpdateCard, {
+  name: "InsightUpdateCard",
+});
+
+Builder.registerComponent(CaseStudyCard, {
+  name: "CaseStudyCard",
 });

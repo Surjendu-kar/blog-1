@@ -12,7 +12,7 @@ interface InsightCard {
   link: string;
 }
 
-const CustomCard = () => {
+const InsightUpdateCard = () => {
   const [cards, setCards] = useState<InsightCard[]>([]);
 
   useEffect(() => {
@@ -116,4 +116,4 @@ const CustomCard = () => {
   );
 };
 
-export default CustomCard;
+export default InsightUpdateCard;
