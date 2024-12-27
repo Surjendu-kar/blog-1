@@ -1,16 +1,9 @@
-import React from "react";
+import { useState } from "react";
 
-type PaginationProps = {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-};
+const Pagination = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalPages = 10;
 
-const Pagination: React.FC<PaginationProps> = ({
-  currentPage = 1,
-  totalPages = 10,
-  onPageChange,
-}) => {
   return (
     <div className="flex items-center justify-center gap-4 pt-8">
       {/* Previous page navigation */}
@@ -22,7 +15,7 @@ const Pagination: React.FC<PaginationProps> = ({
         {[1, 2, 3].map((page) => (
           <button
             key={page}
-            onClick={() => onPageChange(page)}
+            onClick={() => setCurrentPage(page)}
             className={`w-8 h-8 rounded-full flex items-center justify-center ${
               currentPage === page
                 ? "bg-[#00C7BE] text-white"
@@ -38,7 +31,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
         {/* Last page number */}
         <button
-          onClick={() => onPageChange(totalPages)}
+          onClick={() => setCurrentPage(totalPages)}
           className={`w-8 h-8 rounded-full flex items-center justify-center ${
             currentPage === totalPages
               ? "bg-[#00C7BE] text-white"

@@ -35,7 +35,7 @@ const BlogCard = () => {
         // console.log("Transformed Posts:", transformedPosts);
         setPosts(transformedPosts);
       } catch (error) {
-        console.error("Transformation error:", error);
+        // console.error("Transformation error:", error);
       }
     }
     fetchPosts();
