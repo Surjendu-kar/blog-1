@@ -20,22 +20,22 @@ const BlogCard = () => {
     async function fetchPosts() {
       builder.init("d0b1ab2c80db47c9afbc018dd30f96d7");
       const builderData = await builder.getAll("blog-post-card");
-      // console.log("Builder Data:", builderData);
+      console.log("Builder Data:", builderData);
 
       try {
-        const transformedPosts = builderData.map((item: any) => ({
-          image: item.data.image,
-          title: item.data.title,
-          description: item.data.description,
-          authorName: item.data.authorName,
-          authorImg: item.data.authorImg,
-          tag: item.data.tag,
-          time: item.data.time,
+        const transformedPosts = builderData.map((item) => ({
+          image: item.data?.image ?? '',
+          title: item.data?.title ?? '',
+          description: item.data?.description ?? '',
+          authorName: item.data?.authorName ?? '',
+          authorImg: item.data?.authorImg ?? '',
+          tag: item.data?.tag ?? '',
+          time: item.data?.time ?? 0,
         }));
         // console.log("Transformed Posts:", transformedPosts);
         setPosts(transformedPosts);
       } catch (error) {
-        // console.error("Transformation error:", error);
+        console.error("Transformation error:", error);
       }
     }
     fetchPosts();

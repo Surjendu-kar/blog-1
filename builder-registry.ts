@@ -4,8 +4,6 @@ import BlogCard from "./components/BlogWrap/BlogCard";
 import Card from "./components/BlogWrap/Card";
 import CaseStudy from "./components/Feature Section/CaseStudy";
 import CategoryNav from "./components/BlogWrap/CategoryNav";
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
 import InsightUpdate from "./components/Feature Section/InsightUpdate";
 import Pagination from "./components/BlogWrap/Pagination";
 
@@ -13,14 +11,6 @@ builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
 Builder.registerComponent(Builder, {
   name: "Builder",
-});
-
-Builder.registerComponent(Footer, {
-  name: "Footer",
-});
-
-Builder.registerComponent(Header, {
-  name: "Header",
 });
 
 Builder.registerComponent(InsightUpdate, {

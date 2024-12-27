@@ -11,7 +11,7 @@ export default function Header() {
           <Image src={Logo} alt="logo" />
         </div>
 
-        <div className="flex items-center space-x-4 ">
+        <div className="flex items-center space-x-4 text-black">
           <p>AI Consulting</p>
           <p>AI Toolbox</p>
           <p>Content Health</p>
