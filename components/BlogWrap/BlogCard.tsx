@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { builder } from "@builder.io/sdk";
 import Image from "next/image";
+import Link from "next/link";
 
 interface BlogPost {
   image: string;
@@ -11,6 +12,7 @@ interface BlogPost {
   authorImg: string;
   tag: string;
   time: number;
+  slug: string;
 }
 
 const BlogCard = () => {
@@ -20,7 +22,6 @@ const BlogCard = () => {
     async function fetchPosts() {
       builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
       const builderData = await builder.getAll("blog-post-card");
-      console.log("Builder Data:", builderData);
 
       try {
         const transformedPosts = builderData.map((item) => ({
@@ -31,8 +32,8 @@ const BlogCard = () => {
           authorImg: item.data?.authorImg ?? "",
           tag: item.data?.tag ?? "",
           time: item.data?.time ?? 0,
+          slug: item.data?.slug ?? "",
         }));
-        // console.log("Transformed Posts:", transformedPosts);
         setPosts(transformedPosts);
       } catch (error) {
         console.error("Transformation error:", error);
@@ -51,15 +52,19 @@ const BlogCard = () => {
   };
 
   return (
-    <div className="flex ">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
       {posts.map((post, index) => (
-        <div key={index} className="rounded overflow-hidden w-96">
+        <Link
+          href={`/blog/${post.slug}`}
+          key={index}
+          className="flex flex-col rounded-lg overflow-hidden bg-white hover:shadow-lg transition-shadow duration-300"
+        >
           {/* Blog image */}
           <div className="relative w-full h-48">
             <Image
               src={post.image}
               alt={post.title}
-              className="object-cover rounded-lg"
+              className="object-cover"
               fill
               unoptimized={isExternalUrl(post.image)}
               loader={
@@ -69,17 +74,19 @@ const BlogCard = () => {
               }
             />
           </div>
-          <div className="pt-4 gap-3 flex flex-col">
-            {/* Blog title */}
-            <h3 className="font-semibold text-xl">{post.title}</h3>
 
-            {/* Blog description */}
-            <p className="text-gray-600 text-sm">{post.description}</p>
+          <div className="p-4 flex flex-col gap-3">
+            {/* Title */}
+            <h3 className="text-lg font-semibold">{post.title}</h3>
 
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2">
-                {/* Avatar image */}
-                <div className="relative w-8 h-8 rounded-full bg-gray-200 overflow-hidden">
+            {/* Description */}
+            <p className="text-sm text-gray-600">{post.description}</p>
+
+            {/* Author and Tags Row */}
+            <div className="flex items-center gap-2">
+              {/* Author Section */}
+              <div className="flex items-center gap-2 flex-1">
+                <div className="relative w-8 h-8 rounded-full overflow-hidden">
                   <Image
                     src={post.authorImg}
                     alt={post.authorName}
@@ -93,20 +100,19 @@ const BlogCard = () => {
                     }
                   />
                 </div>
-                {/* Author name */}
-                <span className="text-sm">{post.authorName}</span>
+                <span className="text-sm font-medium">{post.authorName}</span>
               </div>
 
               {/* Tag */}
-              <span className="bg-teal-400 text-white text-xs px-3 py-1 rounded-3xl">
+              <span className="px-3 py-1 bg-teal-400 text-white text-xs rounded-full">
                 {post.tag}
               </span>
 
-              {/* time */}
+              {/* Reading Time */}
               <span className="text-sm text-gray-500">{post.time} mins</span>
             </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

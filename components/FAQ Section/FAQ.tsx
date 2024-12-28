@@ -7,7 +7,7 @@ interface Data {
   description: string;
 }
 
-export default function Question() {
+export default function FAQ() {
   const [data, setData] = useState<Data[]>([]);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
@@ -35,7 +35,7 @@ export default function Question() {
   };
 
   return (
-    <div className="max-w-2xl ">
+    <div className="max-w-2xl flex flex-col gap-4">
       {data.map((item, index) => (
         <div key={index}>
           <div className="bg-white rounded-lg shadow-sm border border-gray-100">

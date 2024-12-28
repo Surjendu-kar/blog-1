@@ -38,7 +38,7 @@ export default function CaseStudyCard() {
   }, []);
 
   return (
-    <div className="flex">
+    <div className="flex gap-4">
       {cards.map((card, index) => (
         <CustomCard key={index} card={card} />
       ))}
