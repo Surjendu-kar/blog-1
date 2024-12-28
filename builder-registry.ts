@@ -14,6 +14,7 @@ import InsightUpdateCard from "./components/Feature Section/InsightUpdateCard";
 import NewsletterSignup from "./components/blog-page-2/NewsletterSignup";
 import Pagination from "./components/BlogWrap/Pagination";
 import RelatedPost from "./components/blog-page-2/RelatedPost";
+import VideoBanner from "./components/blog-page-2/VideoBanner";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -290,6 +291,31 @@ Builder.registerComponent(NewsletterSignup, {
       type: "string",
       defaultValue: "Enter your email",
       helperText: "Placeholder text for the email input",
+    },
+  ],
+});
+
+Builder.registerComponent(VideoBanner, {
+  name: "VideoBanner",
+  inputs: [
+    {
+      name: "videoUrl",
+      type: "file",
+      allowedFileTypes: ["mp4", "webm"],
+      helperText: "Upload or provide URL for the background video",
+    },
+    {
+      name: "videoPoster",
+      type: "file",
+      allowedFileTypes: ["jpeg", "jpg", "png", "webp"],
+      helperText: "Thumbnail image shown while video is loading",
+    },
+    {
+      name: "height",
+      type: "string",
+      defaultValue: "400px",
+      enum: ["300px", "400px", "500px", "600px"],
+      helperText: "Height of the video banner",
     },
   ],
 });
