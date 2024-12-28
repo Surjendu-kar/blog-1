@@ -317,5 +317,12 @@ Builder.registerComponent(VideoBanner, {
       enum: ["300px", "400px", "500px", "600px"],
       helperText: "Height of the video banner",
     },
+    {
+      name: "width",
+      type: "string",
+      defaultValue: "100%",
+      enum: ["100%", "75%", "50%", "25%"],
+      helperText: "Width of the video banner",
+    },
   ],
 });

@@ -5,12 +5,14 @@ interface VideoBannerProps {
   videoUrl?: string;
   videoPoster?: string;
   height?: string;
+  width?: string;
 }
 
 const VideoBanner: FC<VideoBannerProps> = ({
   videoUrl,
   videoPoster,
-  height = "400px",
+  height,
+  width,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -28,8 +30,8 @@ const VideoBanner: FC<VideoBannerProps> = ({
 
   return (
     <div
-      className="relative w-full overflow-hidden rounded-xl"
-      style={{ height }}
+      className="relative overflow-hidden rounded-xl"
+      style={{ height, width }}
     >
       {/* Video */}
       <video
