@@ -1,6 +1,7 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
 import BlogCard from "./components/BlogWrap/BlogCard";
+import BlogWrap from "./components/BlogWrap/BlogWrap";
 import Card from "./components/BlogWrap/Card";
 import CaseStudyCard from "./components/Feature Section/CaseStudyCard";
 import CategoryNav from "./components/BlogWrap/CategoryNav";
@@ -120,4 +121,8 @@ Builder.registerComponent(Heading, {
       helperText: "Font size for the description (e.g., 14px, 1rem)",
     },
   ],
+});
+
+Builder.registerComponent(BlogWrap, {
+  name: "BlogWrap",
 });
