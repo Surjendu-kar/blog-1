@@ -1,19 +1,8 @@
+import { FC } from "react";
 import Image from "next/image";
+import { CardProps } from ".";
 
-interface CardData {
-  image: string;
-  tag: string;
-  time: number;
-  title: string;
-  description: string;
-  link: string;
-}
-
-interface CardProps {
-  card: CardData;
-}
-
-const CustomCard = ({ card }: CardProps) => {
+const CustomCard: FC<CardProps> = ({ card }) => {
   const isExternalUrl = (url: string): boolean => {
     try {
       new URL(url);
@@ -24,7 +13,7 @@ const CustomCard = ({ card }: CardProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg bg-white w-96">
+    <div className="flex flex-col gap-4 rounded-lg bg-white w-full">
       {/* Card Image */}
       <div className="relative h-48 rounded-lg overflow-hidden">
         <Image
@@ -32,6 +21,7 @@ const CustomCard = ({ card }: CardProps) => {
           alt={card.title}
           className="object-cover"
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           unoptimized={isExternalUrl(card.image)}
           loader={
             isExternalUrl(card.image)
@@ -61,7 +51,7 @@ const CustomCard = ({ card }: CardProps) => {
         <div className="mt-2">
           <a
             href={card.link}
-            className="text-cyan-500 text-sm underline inline-flex items-center"
+            className="text-[#00C7BE] text-sm underline inline-flex items-center hover:text-[#00a59e] transition-colors"
           >
             Read more
             <svg
