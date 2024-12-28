@@ -1,5 +1,4 @@
 import { FC, useRef, useState } from "react";
-import Image from "next/image";
 
 interface VideoBannerProps {
   videoUrl?: string;
