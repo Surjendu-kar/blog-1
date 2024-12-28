@@ -18,7 +18,7 @@ const Heading: React.FC<HeadingProps> = ({
       {subtitle && (
         <p className="text-center text-sm text-[#00C7BE]">{subtitle}</p>
       )}
-      <h1 className="font-bold" style={{ fontSize: titleFontSize }}>
+      <h1 className="font-bold text-[#000000]" style={{ fontSize: titleFontSize }}>
         {title}
       </h1>
       {description && (

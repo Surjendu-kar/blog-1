@@ -51,10 +51,8 @@ const BlogWrap = () => {
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
-  // Handle page change
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    // Optionally scroll to top of blog section
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
