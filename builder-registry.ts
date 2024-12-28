@@ -11,6 +11,7 @@ import Contact from "./components/Contact/Contact";
 import FAQ from "./components/FAQ Section/FAQ";
 import Heading from "./components/Heading/Heading";
 import InsightUpdateCard from "./components/Feature Section/InsightUpdateCard";
+import NewsletterSignup from "./components/blog-page-2/NewsletterSignup";
 import Pagination from "./components/BlogWrap/Pagination";
 import RelatedPost from "./components/blog-page-2/RelatedPost";
 
@@ -144,11 +145,23 @@ Builder.registerComponent(BlogDetail, {
       helperText: "The main title of the blog post",
     },
     {
+      name: "titleFontSize",
+      type: "string",
+      defaultValue: "35px",
+      helperText: "Font size for the title",
+    },
+    {
       name: "content",
       type: "longText",
       defaultValue:
         "Lorem ipsum dolor sit amet consectetur. Enim quis et sapien id integer...",
       helperText: "The main content of the blog post",
+    },
+    {
+      name: "contentFontSize",
+      type: "string",
+      defaultValue: "16px",
+      helperText: "Font size for the main content",
     },
     {
       name: "image",
@@ -162,6 +175,12 @@ Builder.registerComponent(BlogDetail, {
       defaultValue:
         "Ornare ac sem tortor elementum morbi. Dictum imperdiet pharetra id nulla id cursus...",
       helperText: "The second paragraph after the image",
+    },
+    {
+      name: "secondParagraphFontSize",
+      type: "string",
+      defaultValue: "16px",
+      helperText: "Font size for the second paragraph",
     },
     {
       name: "bulletPoints",
@@ -180,10 +199,22 @@ Builder.registerComponent(BlogDetail, {
       helperText: "List of bullet points",
     },
     {
+      name: "bulletPointsFontSize",
+      type: "string",
+      defaultValue: "16px",
+      helperText: "Font size for bullet points",
+    },
+    {
       name: "conclusion",
       type: "longText",
       defaultValue: "Ornare ac sem tortor elementum morbi...",
       helperText: "The concluding paragraph",
+    },
+    {
+      name: "conclusionFontSize",
+      type: "string",
+      defaultValue: "16px",
+      helperText: "Font size for the conclusion",
     },
   ],
 });
@@ -195,38 +226,70 @@ Builder.registerComponent(RelatedPost, {
       name: "title",
       type: "string",
       defaultValue: "Unlocking AI's potential in AI Healthcare",
-      helperText: "The main title"
+      helperText: "The main title",
     },
     {
       name: "description",
       type: "string",
-      defaultValue: "Our Ai Hackathons are intensive, collaborative sessions that spark Innovation",
-      helperText: "Description text below the title"
+      defaultValue:
+        "Our Ai Hackathons are intensive, collaborative sessions that spark Innovation",
+      helperText: "Description text below the title",
     },
     {
       name: "authorImage",
       type: "file",
       allowedFileTypes: ["jpeg", "jpg", "png", "webp"],
       defaultValue: "/blog-img/avatar.png",
-      helperText: "Author's profile image"
+      helperText: "Author's profile image",
     },
     {
       name: "authorName",
       type: "string",
       defaultValue: "Bernd Holbein",
-      helperText: "Author's name"
+      helperText: "Author's name",
     },
     {
       name: "tag",
       type: "string",
       defaultValue: "Insights",
-      helperText: "Category tag"
+      helperText: "Category tag",
     },
     {
       name: "readTime",
       type: "string",
       defaultValue: "12 mins",
-      helperText: "Estimated reading time"
-    }
-  ]
+      helperText: "Estimated reading time",
+    },
+  ],
+});
+
+Builder.registerComponent(NewsletterSignup, {
+  name: "NewsletterSignup",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "WeframeTech News Weekly",
+      helperText: "Newsletter title text",
+    },
+    {
+      name: "description",
+      type: "longText",
+      defaultValue:
+        "Stay informed on our latest AI advancements and business insights by joining the Symbiofy newsletter. By subscribing, you consent to our Privacy Policy.",
+      helperText: "Newsletter description text",
+    },
+    {
+      name: "buttonText",
+      type: "string",
+      defaultValue: "Join now",
+      helperText: "Text displayed on the submit button",
+    },
+    {
+      name: "placeholderText",
+      type: "string",
+      defaultValue: "Enter your email",
+      helperText: "Placeholder text for the email input",
+    },
+  ],
 });

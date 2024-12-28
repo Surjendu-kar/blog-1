@@ -39,7 +39,7 @@ const BlogCard = ({ posts }: BlogCardProps) => {
             <Image
               src={post.image}
               alt={post.title}
-              className="object-cover"
+              className="object-cover rounded-lg"
               fill
               unoptimized={isExternalUrl(post.image)}
               loader={
