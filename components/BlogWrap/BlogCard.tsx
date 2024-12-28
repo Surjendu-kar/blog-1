@@ -18,7 +18,7 @@ const BlogCard = () => {
 
   useEffect(() => {
     async function fetchPosts() {
-      builder.init("d0b1ab2c80db47c9afbc018dd30f96d7");
+      builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
       const builderData = await builder.getAll("blog-post-card");
       console.log("Builder Data:", builderData);
 
