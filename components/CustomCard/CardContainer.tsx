@@ -4,33 +4,57 @@ import { CardContainerProps } from ".";
 
 const CardContainer: FC<CardContainerProps> = ({ cards, cardType }) => {
   const [showAll, setShowAll] = useState<boolean>(false);
-  const visibleCards = showAll ? cards : cards.slice(0, 3);
+  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
   const hasMoreCards = cards.length > 3;
 
   const toggleView = () => {
+    setIsTransitioning(true);
     setShowAll(!showAll);
-    // Smooth scroll to top of container when collapsing
+
     if (showAll) {
-      window.scrollTo({ top: window.scrollY - 500, behavior: "smooth" });
+      // Smooth scroll only after transition starts
+      setTimeout(() => {
+        window.scrollTo({ top: window.scrollY - 500, behavior: "smooth" });
+      }, 100);
     }
   };
 
   return (
-    <div className="flex flex-col items-center gap-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full">
-        {visibleCards.map((card, index) => (
-          <CustomCard key={`${cardType}-${index}`} card={card} />
+    <div className="w-full max-w-[1200px] mx-auto">
+      {/* Cards Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+        {cards.map((card, index) => (
+          <div
+            key={`${cardType}-${index}`}
+            className={`transform transition-all duration-500 ease-in-out ${
+              index >= 3
+                ? showAll
+                  ? "opacity-100 scale-100 max-h-[1000px] mb-6"
+                  : "opacity-0 scale-95 max-h-0 mb-0 pointer-events-none"
+                : "opacity-100 scale-100 max-h-[1000px] mb-6"
+            }`}
+            onTransitionEnd={() => {
+              setIsTransitioning(false);
+            }}
+          >
+            <CustomCard card={card} />
+          </div>
         ))}
       </div>
 
+      {/* View All Button */}
       {hasMoreCards && (
-        <button
-          onClick={toggleView}
-          className="px-8 py-2 border border-[#00C7BE] text-[#00C7BE] rounded-md 
-                   hover:bg-[#00C7BE] hover:text-white transition-colors"
-        >
-          {showAll ? "View less" : "View all"}
-        </button>
+        <div className="flex justify-center mt-8">
+          <button
+            onClick={toggleView}
+            disabled={isTransitioning}
+            className="px-8 py-2 border border-[#00C7BE] text-[#00C7BE] rounded-md 
+                     hover:bg-[#00C7BE] hover:text-white transition-colors
+                     disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {showAll ? "View less" : "View all"}
+          </button>
+        </div>
       )}
     </div>
   );
