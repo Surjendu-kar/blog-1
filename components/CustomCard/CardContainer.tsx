@@ -22,7 +22,7 @@ const CardContainer: FC<CardContainerProps> = ({ cards, cardType }) => {
   return (
     <div className="w-full max-w-[1200px] mx-auto">
       {/* Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {cards.map((card, index) => (
           <div
             key={`${cardType}-${index}`}
