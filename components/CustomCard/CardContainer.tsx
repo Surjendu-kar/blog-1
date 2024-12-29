@@ -44,7 +44,7 @@ const CardContainer: FC<CardContainerProps> = ({ cards, cardType }) => {
 
       {/* View All Button */}
       {hasMoreCards && (
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center">
           <button
             onClick={toggleView}
             disabled={isTransitioning}

@@ -19,6 +19,10 @@ interface BlogPost {
 const BlogWrap = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isChanging, setIsChanging] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<"left" | "right">(
+    "left"
+  );
   const postsPerPage = 6;
 
   useEffect(() => {
@@ -52,14 +56,29 @@ const BlogWrap = () => {
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
   const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    setSlideDirection(pageNumber > currentPage ? "left" : "right");
+    setIsChanging(true);
+
+    // Start slide out animation
+    setTimeout(() => {
+      setCurrentPage(pageNumber);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Reset changing state after new content is loaded
+      setTimeout(() => {
+        setIsChanging(false);
+      }, 50);
+    }, 500);
   };
 
   return (
     <div className="container mx-auto px-4">
       <CategoryNav />
-      <BlogCard posts={currentPosts} />
+      <BlogCard
+        posts={currentPosts}
+        slideDirection={slideDirection}
+        isChanging={isChanging}
+      />
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}
