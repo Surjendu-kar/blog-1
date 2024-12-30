@@ -1,26 +1,22 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
-import BlogCard from "./components/BlogWrap/BlogCard";
-import BlogDetail from "./components/blog-page-2/BlogDetails";
-import BlogWrap from "./components/BlogWrap/BlogWrap";
-import Card from "./components/BlogWrap/Card";
-import CaseStudyCard from "./components/Feature Section/CaseStudyCard";
-import CategoryName from "./components/blog-page-2/CategoryName";
-import CategoryNav from "./components/BlogWrap/CategoryNav";
-import Contact from "./components/Contact/Contact";
-import FAQ from "./components/FAQ Section/FAQ";
+import BlogCard from "./components/blog/BlogWrap/BlogCard";
+import BlogDetail from "./components/blog-post/BlogDetails";
+import BlogWrap from "./components/blog/BlogWrap/BlogWrap";
+import Card from "./components/blog/BlogWrap/Card";
+import CaseStudyCard from "./components/blog/Feature Section/CaseStudyCard";
+import CategoryName from "./components/blog-post/CategoryName";
+import CategoryNav from "./components/blog/BlogWrap/CategoryNav";
+import Contact from "./components/blog/Contact/Contact";
+import FAQ from "./components/blog/FAQ Section/FAQ";
 import Heading from "./components/Heading/Heading";
-import InsightUpdateCard from "./components/Feature Section/InsightUpdateCard";
-import NewsletterSignup from "./components/blog-page-2/NewsletterSignup";
-import Pagination from "./components/BlogWrap/Pagination";
-import RelatedPost from "./components/blog-page-2/RelatedPost";
-import VideoBanner from "./components/blog-page-2/VideoBanner";
+import InsightUpdateCard from "./components/blog/Feature Section/InsightUpdateCard";
+import NewsletterSignup from "./components/blog-post/NewsletterSignup";
+import Pagination from "./components/blog/BlogWrap/Pagination";
+import RelatedPost from "./components/blog-post/RelatedPost";
+import VideoBanner from "./components/blog-post/VideoBanner";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
-
-Builder.registerComponent(Builder, {
-  name: "Builder",
-});
 
 Builder.registerComponent(BlogCard, {
   name: "BlogCard",

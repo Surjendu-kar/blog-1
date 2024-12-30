@@ -1,5 +1,6 @@
+"use client";
 import { FC, useState } from "react";
-import CustomCard from "../CustomCard/CustomCard";
+import CustomCard from "./CustomCard";
 import { CardContainerProps } from ".";
 
 const CardContainer: FC<CardContainerProps> = ({ cards, cardType }) => {

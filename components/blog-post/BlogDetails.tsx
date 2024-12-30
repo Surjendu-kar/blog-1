@@ -8,7 +8,6 @@ interface BlogDetailProps {
   secondParagraph?: string;
   bulletPoints?: { point: string }[];
   conclusion?: string;
-  // Font size properties
   titleFontSize?: string;
   contentFontSize?: string;
   secondParagraphFontSize?: string;
@@ -23,7 +22,6 @@ const BlogDetail: FC<BlogDetailProps> = ({
   secondParagraph,
   bulletPoints = [],
   conclusion,
-  // Font sizes with defaults
   titleFontSize = "35px",
   contentFontSize = "16px",
   secondParagraphFontSize = "16px",
