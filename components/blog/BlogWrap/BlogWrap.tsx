@@ -56,7 +56,7 @@ const BlogWrap = () => {
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
   const handlePageChange = (pageNumber: number) => {
-    setSlideDirection(pageNumber > currentPage ? "left" : "right");
+    setSlideDirection(pageNumber > currentPage ? "right" : "left");
     setIsChanging(true);
 
     // Start slide out animation

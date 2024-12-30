@@ -38,7 +38,7 @@ const BlogDetail: FC<BlogDetailProps> = ({
   };
 
   return (
-    <article className="container">
+    <article className="container ">
       {/* Title */}
       <h1
         className="font-bold mb-6 text-[#000000] capitalize"

@@ -2,9 +2,9 @@ import React from "react";
 import { builder } from "@builder.io/sdk";
 import BlogGrid from "./BlogGrid";
 
-export default async function BlogPage() {
-  builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
+export default async function BlogPage() {
   const builderData = await builder.getAll("blog-post-card", {
     prerender: false,
   });

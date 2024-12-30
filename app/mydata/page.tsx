@@ -1,10 +1,13 @@
-import BlogPage from "@/components/blog/BlogWrap/BlogPage";
-import React from "react";
+import BlogPage from "@/components/blog/ssr-components/Blog Page/BlogPage";
+import CaseStudyPage from "@/components/blog/ssr-components/Case Study/CaseStudyPage";
+import InsightUpdatePage from "@/components/blog/ssr-components/Insight Update/InsightUpdatePage";
 
-function page() {
+async function page() {
   return (
-    <div className="bg-white">
+    <div className="flex flex-col bg-white gap-10">
       <BlogPage />
+      <CaseStudyPage />
+      <InsightUpdatePage />
     </div>
   );
 }

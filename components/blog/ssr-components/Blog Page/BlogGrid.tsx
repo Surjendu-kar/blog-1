@@ -2,8 +2,8 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Pagination from "./Pagination";
-import CategoryNav from "./CategoryNav";
+import Pagination from "../../BlogWrap/Pagination";
+import CategoryNav from "../../BlogWrap/CategoryNav";
 
 interface BlogPost {
   image: string;

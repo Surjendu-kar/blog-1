@@ -3,6 +3,7 @@ import { builder, Builder } from "@builder.io/react";
 import BlogDetail from "./components/blog-post/BlogDetails";
 import BlogWrap from "./components/blog/BlogWrap/BlogWrap";
 import CaseStudyCard from "./components/blog/Feature Section/CaseStudyCard";
+import CaseStudyPage from "./components/blog/ssr-components/Case Study/CaseStudyPage";
 import CategoryName from "./components/blog-post/CategoryName";
 import CategoryNav from "./components/blog/BlogWrap/CategoryNav";
 import Contact from "./components/blog/Contact/Contact";
@@ -272,4 +273,8 @@ Builder.registerComponent(VideoBanner, {
       helperText: "Width of the video banner",
     },
   ],
+});
+
+Builder.registerComponent(CaseStudyPage, {
+  name: "CaseStudyPage",
 });
