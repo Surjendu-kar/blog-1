@@ -1,7 +1,21 @@
 import ContactBg from "@/public/contact-img/contact -bg.jpeg";
 import Image from "next/image";
 
-function Contact() {
+interface ContactProps {
+  title?: string;
+  description?: string;
+  emailPlaceholder?: string;
+  buttonText?: string;
+  privacyText?: string;
+}
+
+function Contact({
+  title,
+  description,
+  emailPlaceholder,
+  buttonText,
+  privacyText,
+}: ContactProps) {
   return (
     <div className="relative w-full h-[500px]">
       {/* Background Image */}
@@ -21,29 +35,24 @@ function Contact() {
         <div className="flex flex-col bg-white rounded-lg p-8 px-24 py-14 gap-5">
           <div className="max-w-xl">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-              Schedule Your Consultation Today
+              {title}
             </h2>
-            <p className="text-gray-600 text-sm">
-              Webframe tech is the modern, award-winning platform that empowers
-              some of the largest names in healthcare and advisory sectors.
-            </p>
+            <p className="text-gray-600 text-sm">{description}</p>
           </div>
 
           <div className="flex flex-col gap-2">
             <div className="flex gap-5 ali">
               <input
                 type="email"
-                placeholder="Enter your email"
-                className=" pl-4 pr-20 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00C7BE] focus:border-transparent"
+                placeholder={emailPlaceholder}
+                className="pl-4 pr-20 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#00C7BE] focus:border-transparent"
               />
 
               <button className="bg-[#00C7BE] text-white px-3 py-2 rounded-md hover:bg-[#00C7BE]/90 transition-colors">
-                book a meeting
+                {buttonText}
               </button>
             </div>
-            <p className="text-xs text-[#B3B3B3]">
-              By submitting you agree to our privacy policy.
-            </p>
+            <p className="text-xs text-[#B3B3B3]">{privacyText}</p>
           </div>
         </div>
       </div>

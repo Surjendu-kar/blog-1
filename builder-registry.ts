@@ -35,7 +35,42 @@ Builder.registerComponent(CaseStudyCard, {
 
 Builder.registerComponent(Contact, {
   name: "Contact",
+  inputs: [
+    {
+      name: "title",
+      type: "string",
+      defaultValue: "Schedule Your Consultation Today",
+      helperText: "Main heading text",
+    },
+    {
+      name: "description",
+      type: "longText",
+      defaultValue:
+        "Webframe tech is the modern, award-winning platform that empowers some of the largest names in healthcare and advisory sectors.",
+      helperText: "Description text below the heading",
+    },
+    {
+      name: "emailPlaceholder",
+      type: "string",
+      defaultValue: "Enter your email",
+      helperText: "Placeholder text for email input",
+    },
+    {
+      name: "buttonText",
+      type: "string",
+      defaultValue: "book a meeting",
+      helperText: "Text for the submit button",
+    },
+    {
+      name: "privacyText",
+      type: "string",
+      defaultValue: "By submitting you agree to our privacy policy.",
+      helperText: "Privacy policy text below the form",
+    },
+  ],
 });
+
+export default Contact;
 
 Builder.registerComponent(FAQ, {
   name: "FAQ",
