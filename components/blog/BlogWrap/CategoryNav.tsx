@@ -27,7 +27,7 @@ const CategoryNav = ({
           <li key={index}>
             <a
               href="#"
-              className={`text-sm ${
+              className={`text-sm transition-colors duration-200 hover:text-[#00C7BE] ${
                 index === 1 ? "text-[#00C7BE]" : "text-[#595959]"
               }`}
             >
