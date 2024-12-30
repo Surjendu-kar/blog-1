@@ -33,16 +33,19 @@ const BlogWrap = () => {
       const builderData = await builder.getAll("blog-post-card");
 
       try {
-        const transformedPosts = builderData.map((item) => ({
-          image: item.data?.image ?? "",
-          title: item.data?.title ?? "",
-          description: item.data?.description ?? "",
-          authorName: item.data?.authorName ?? "",
-          authorImg: item.data?.authorImg ?? "",
-          tag: item.data?.tag ?? "",
-          time: item.data?.time ?? 0,
-          slug: item.data?.slug ?? "",
-        }));
+        // Filter data where category is 'all-cards' and transform it
+        const transformedPosts = builderData
+          .filter((item) => item.data?.category === "all-cards")
+          .map((item) => ({
+            image: item.data?.image ?? "",
+            title: item.data?.title ?? "",
+            description: item.data?.description ?? "",
+            authorName: item.data?.authorName ?? "",
+            authorImg: item.data?.authorImg ?? "",
+            tag: item.data?.tag ?? "",
+            time: item.data?.time ?? 0,
+            slug: item.data?.slug ?? "",
+          }));
         setPosts(transformedPosts);
         setFilteredPosts(transformedPosts);
       } catch (error) {

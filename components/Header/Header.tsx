@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { builder, BuilderContent } from "@builder.io/sdk";
 import Announcement from "../blog/Announcement/Announcement";
+import { NavItem } from "./NavItem";
 
 interface NavItemData {
   title?: string;
   url?: string;
+  subItems?: { item: string; url: string }[];
 }
 
 export default async function Header() {
@@ -17,10 +19,10 @@ export default async function Header() {
     prerender: false,
   });
 
-  // Map the data and reverse the array to get correct order
   const navItems = [...builderData].reverse().map((item: BuilderContent) => ({
     title: (item.data as NavItemData).title || item.name || "",
     url: (item.data as NavItemData).url || "",
+    subItems: (item.data as NavItemData).subItems || [],
   }));
 
   return (
@@ -36,13 +38,12 @@ export default async function Header() {
 
           <div className="flex items-center space-x-4 text-black">
             {navItems.map((item, index) => (
-              <Link
+              <NavItem
                 key={index}
-                href={item.url}
-                className="hover:text-[#00C7BE] transition-colors"
-              >
-                {item.title}
-              </Link>
+                title={item.title}
+                url={item.url}
+                subItems={item.subItems}
+              />
             ))}
           </div>
 
