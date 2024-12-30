@@ -1,77 +1,47 @@
-"use client";
-import { useEffect, useState } from "react";
-import { builder } from "@builder.io/sdk";
 import Logo from "@/public/header-img/logo.svg";
 import LightDark from "@/public/header-img/lightDark.svg";
 import Image from "next/image";
 import Link from "next/link";
+import { builder, BuilderContent } from "@builder.io/sdk";
 
-interface NavData {
-  nav1: string;
-  nav2: string;
-  nav3: string;
-  nav4: string;
+interface NavItemData {
+  title?: string;
+  url?: string;
+  [key: string]: any;
 }
 
-export default function Header() {
-  const [navLinks, setNavLinks] = useState<NavData[]>([]);
+export default async function Header() {
+  builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
-  useEffect(() => {
-    async function fetchNavData() {
-      builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
-      const builderData = await builder.getAll("nav-data");
+  const builderData = await builder.getAll("nav-data", {
+    prerender: false,
+  });
 
-      try {
-        const transformedData = builderData.map((item) => ({
-          nav1: item.data?.aiConsulting ?? "",
-          nav2: item.data?.aiToolbox ?? "",
-          nav3: item.data?.contentHealth ?? "",
-          nav4: item.data?.resources ?? "",
-        }));
-        setNavLinks(transformedData);
-      } catch (error) {
-        console.error("Transformation error:", error);
-      }
-    }
-    fetchNavData();
-  }, []);
+  // Map the data and reverse the array to get correct order
+  const navItems = [...builderData].reverse().map((item: BuilderContent) => ({
+    title: (item.data as NavItemData).title || item.name || "",
+    url: (item.data as NavItemData).url || "",
+  }));
 
   return (
     <header className="bg-white w-full">
       <div className="container flex p-4 justify-between w-full">
         <div>
-          <Image src={Logo} alt="logo" />
+          <Link href="/">
+            <Image src={Logo} alt="logo" priority />
+          </Link>
         </div>
 
         <div className="flex items-center space-x-4 text-black">
-          {navLinks.length > 0 && (
-            <>
-              <Link
-                href={navLinks[0].nav1}
-                className="hover:text-[#00C7BE] transition-colors"
-              >
-                AI Consulting
-              </Link>
-              <Link
-                href={navLinks[0].nav2}
-                className="hover:text-[#00C7BE] transition-colors"
-              >
-                AI Toolbox
-              </Link>
-              <Link
-                href={navLinks[0].nav3}
-                className="hover:text-[#00C7BE] transition-colors"
-              >
-                Content Health
-              </Link>
-              <Link
-                href={navLinks[0].nav4}
-                className="hover:text-[#00C7BE] transition-colors"
-              >
-                Resources
-              </Link>
-            </>
-          )}
+          {navItems.map((item, index) => (
+            <Link
+              key={index}
+              href={item.url}
+              className="hover:text-[#00C7BE] transition-colors"
+            >
+              {item.title}
+            </Link>
+          ))}
         </div>
 
         <div className="flex items-center space-x-2">
@@ -85,6 +55,7 @@ export default function Header() {
             src={LightDark}
             alt="lightDark mode"
             className="cursor-pointer"
+            priority
           />
         </div>
       </div>
