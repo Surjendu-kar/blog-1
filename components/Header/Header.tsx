@@ -7,7 +7,6 @@ import { builder, BuilderContent } from "@builder.io/sdk";
 interface NavItemData {
   title?: string;
   url?: string;
-  [key: string]: any;
 }
 
 export default async function Header() {

@@ -1,9 +1,7 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
-import BlogCard from "./components/blog/BlogWrap/BlogCard";
 import BlogDetail from "./components/blog-post/BlogDetails";
 import BlogWrap from "./components/blog/BlogWrap/BlogWrap";
-import Card from "./components/blog/BlogWrap/Card";
 import CaseStudyCard from "./components/blog/Feature Section/CaseStudyCard";
 import CategoryName from "./components/blog-post/CategoryName";
 import CategoryNav from "./components/blog/BlogWrap/CategoryNav";
@@ -18,59 +16,12 @@ import VideoBanner from "./components/blog-post/VideoBanner";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
-Builder.registerComponent(BlogCard, {
-  name: "BlogCard",
-});
-
 Builder.registerComponent(CategoryNav, {
   name: "CategoryNav",
 });
 
 Builder.registerComponent(Pagination, {
   name: "Pagination",
-});
-
-Builder.registerComponent(Card, {
-  name: "Card",
-  inputs: [
-    {
-      name: "blogImage",
-      type: "file",
-      allowedFileTypes: ["jpeg", "jpg", "png", "webp"],
-      defaultValue: "/blog-img/blog-img.jpg",
-    },
-    {
-      name: "blogTitle",
-      type: "string",
-      defaultValue: "Title",
-    },
-    {
-      name: "blogDescription",
-      type: "longText",
-      defaultValue: "description",
-    },
-    {
-      name: "authorImage",
-      type: "file",
-      allowedFileTypes: ["jpeg", "jpg", "png", "webp"],
-      defaultValue: "/blog-img/avatar.png",
-    },
-    {
-      name: "authorName",
-      type: "string",
-      defaultValue: "Bernd Holbein",
-    },
-    {
-      name: "tag",
-      type: "string",
-      defaultValue: "Insights",
-    },
-    {
-      name: "readTime",
-      type: "string",
-      defaultValue: "12 mins",
-    },
-  ],
 });
 
 Builder.registerComponent(InsightUpdateCard, {
