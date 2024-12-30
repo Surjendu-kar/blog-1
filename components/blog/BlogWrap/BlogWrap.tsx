@@ -18,11 +18,13 @@ interface BlogPost {
 
 const BlogWrap = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanging, setIsChanging] = useState(false);
   const [slideDirection, setSlideDirection] = useState<"left" | "right">(
     "left"
   );
+  const [searchQuery, setSearchQuery] = useState("");
   const postsPerPage = 6;
 
   useEffect(() => {
@@ -42,6 +44,7 @@ const BlogWrap = () => {
           slug: item.data?.slug ?? "",
         }));
         setPosts(transformedPosts);
+        setFilteredPosts(transformedPosts);
       } catch (error) {
         console.error("Transformation error:", error);
       }
@@ -49,22 +52,36 @@ const BlogWrap = () => {
     fetchPosts();
   }, []);
 
+  // Handle search
+  useEffect(() => {
+    const query = searchQuery.toLowerCase().trim();
+    if (query === "") {
+      setFilteredPosts(posts);
+    } else {
+      const filtered = posts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(query) ||
+          post.description.toLowerCase().includes(query)
+      );
+      setFilteredPosts(filtered);
+    }
+    setCurrentPage(1);
+  }, [searchQuery, posts]);
+
   // Calculate pagination
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  const totalPages = Math.ceil(posts.length / postsPerPage);
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
 
   const handlePageChange = (pageNumber: number) => {
     setSlideDirection(pageNumber > currentPage ? "right" : "left");
     setIsChanging(true);
 
-    // Start slide out animation
     setTimeout(() => {
       setCurrentPage(pageNumber);
       window.scrollTo({ top: 0, behavior: "smooth" });
 
-      // Reset changing state after new content is loaded
       setTimeout(() => {
         setIsChanging(false);
       }, 50);
@@ -73,12 +90,20 @@ const BlogWrap = () => {
 
   return (
     <div className="container mx-auto px-4">
-      <CategoryNav />
+      <CategoryNav searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+
+      {filteredPosts.length === 0 && (
+        <div className="text-center py-8 text-gray-600">
+          No blogs found matching your search.
+        </div>
+      )}
+
       <BlogCard
         posts={currentPosts}
         slideDirection={slideDirection}
         isChanging={isChanging}
       />
+
       {totalPages > 1 && (
         <Pagination
           currentPage={currentPage}

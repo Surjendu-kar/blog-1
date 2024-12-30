@@ -2,6 +2,12 @@ import SearchIcon from "@/public/blog-img/searchIcon.svg";
 import FilterIcon from "@/public/blog-img/filterIcon.svg";
 import Image from "next/image";
 
+interface CategoryNavProps {
+  categories?: string[];
+  searchQuery: string;
+  onSearchChange: (query: string) => void;
+}
+
 const CategoryNav = ({
   categories = [
     "View All",
@@ -10,7 +16,9 @@ const CategoryNav = ({
     "Case Studies",
     "Best Practices",
   ],
-}) => {
+  searchQuery,
+  onSearchChange,
+}: CategoryNavProps) => {
   return (
     <nav className="flex items-center justify-between">
       {/* Navigation links */}
@@ -43,6 +51,8 @@ const CategoryNav = ({
         <input
           type="search"
           placeholder="Search..."
+          value={searchQuery}
+          onChange={(e) => onSearchChange(e.target.value)}
           className="pl-10 pr-12 py-2 rounded-md border border-[#00C7BE] focus:outline-none focus:border-[#00C7BE] w-64"
         />
 
