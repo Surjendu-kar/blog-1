@@ -46,7 +46,7 @@ Builder.registerComponent(Contact, {
       name: "description",
       type: "longText",
       defaultValue:
-        "Webframe tech is the modern, award-winning platform that empowers some of the largest names in healthcare and advisory sectors.",
+        "Weframe tech is the modern, award-winning platform that empowers some of the largest names in healthcare and advisory sectors.",
       helperText: "Description text below the heading",
     },
     {
