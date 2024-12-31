@@ -1,4 +1,3 @@
-import ArrowUp from "@/public/arrowUp.svg";
 import { builder } from "@builder.io/sdk";
 import Image from "next/image";
 
