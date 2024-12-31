@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Pagination from "../../BlogWrap/Pagination";
-import CategoryNav from "../../BlogWrap/CategoryNav";
+// import CategoryNav from "../../BlogWrap/CategoryNav";
 
 interface BlogPost {
   image: string;
@@ -21,7 +21,7 @@ interface BlogGridProps {
 }
 
 const BlogGrid = ({ initialPosts }: BlogGridProps) => {
-  const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
+  const [posts] = useState<BlogPost[]>(initialPosts);
   const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>(initialPosts);
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanging, setIsChanging] = useState(false);
@@ -68,7 +68,7 @@ const BlogGrid = ({ initialPosts }: BlogGridProps) => {
 
   return (
     <div className="container mx-auto px-4">
-      <CategoryNav searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+      {/* <CategoryNav searchQuery={searchQuery} onSearchChange={setSearchQuery} /> */}
 
       {filteredPosts.length === 0 && (
         <div className="text-center py-8 text-gray-600">

@@ -5,8 +5,9 @@ import Link from "next/link";
 import { builder, BuilderContent } from "@builder.io/sdk";
 import Announcement from "../blog/Announcement/Announcement";
 import { NavItem } from "./NavItem";
+import MobileMenu from "./MobileMenu";
 
-interface NavItemData {
+export interface NavItemData {
   title?: string;
   url?: string;
   subItems?: { item: string; url: string }[];
@@ -29,14 +30,20 @@ export default async function Header() {
     <>
       <Announcement />
       <header className="bg-white w-full">
-        <div className="container flex p-4 justify-between w-full">
+        <div className="container flex p-4 justify-between w-full items-center">
           <div>
             <Link href="/">
-              <Image src={Logo} alt="logo" priority />
+              <Image
+                src={Logo}
+                alt="logo"
+                priority
+                className="w-24 md:w-auto"
+              />
             </Link>
           </div>
 
-          <div className="flex items-center space-x-4 text-black">
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-4 text-black">
             {navItems.map((item, index) => (
               <NavItem
                 key={index}
@@ -47,7 +54,8 @@ export default async function Header() {
             ))}
           </div>
 
-          <div className="flex items-center space-x-2">
+          {/* Desktop Buttons */}
+          <div className="hidden md:flex items-center space-x-2">
             <button className="border border-[#00C7BE] text-[#00C7BE] px-4 py-3 rounded-md capitalize hover:bg-[#00C7BE] hover:text-white transition-colors">
               login
             </button>
@@ -61,6 +69,9 @@ export default async function Header() {
               priority
             />
           </div>
+
+          {/* Mobile Menu Button */}
+          <MobileMenu items={navItems} />
         </div>
       </header>
     </>

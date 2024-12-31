@@ -96,7 +96,7 @@ const BlogWrap = () => {
 
   const handleCategoryChange = (category: CardType) => {
     setCurrentCategory(category);
-    setSearchQuery(""); // Reset search query when changing categories
+    setSearchQuery("");
   };
 
   // Updated search effect
