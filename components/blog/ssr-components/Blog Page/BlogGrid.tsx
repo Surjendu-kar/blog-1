@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Pagination from "../../BlogWrap/Pagination";
@@ -21,17 +21,36 @@ interface BlogGridProps {
 }
 
 const BlogGrid = ({ initialPosts }: BlogGridProps) => {
+  const [posts, setPosts] = useState<BlogPost[]>(initialPosts);
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>(initialPosts);
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanging, setIsChanging] = useState(false);
   const [slideDirection, setSlideDirection] = useState<"left" | "right">(
     "left"
   );
+  const [searchQuery, setSearchQuery] = useState("");
 
   const postsPerPage = 6;
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = initialPosts.slice(indexOfFirstPost, indexOfLastPost);
-  const totalPages = Math.ceil(initialPosts.length / postsPerPage);
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+
+  // Handle search
+  useEffect(() => {
+    const query = searchQuery.toLowerCase().trim();
+    if (query === "") {
+      setFilteredPosts(posts);
+    } else {
+      const filtered = posts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(query) ||
+          post.description.toLowerCase().includes(query)
+      );
+      setFilteredPosts(filtered);
+    }
+    setCurrentPage(1);
+  }, [searchQuery, posts]);
 
   const handlePageChange = (pageNumber: number) => {
     setSlideDirection(pageNumber > currentPage ? "right" : "left");
@@ -48,10 +67,16 @@ const BlogGrid = ({ initialPosts }: BlogGridProps) => {
   };
 
   return (
-    <div className="flex flex-col mx-auto gap-4">
-      <CategoryNav />
+    <div className="container mx-auto px-4">
+      <CategoryNav searchQuery={searchQuery} onSearchChange={setSearchQuery} />
 
-      {/* all blogs */}
+      {filteredPosts.length === 0 && (
+        <div className="text-center py-8 text-gray-600">
+          No blogs found matching your search.
+        </div>
+      )}
+
+      {/* Blog grid */}
       <div
         className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transform transition-transform duration-500 ease-in-out ${
           isChanging
