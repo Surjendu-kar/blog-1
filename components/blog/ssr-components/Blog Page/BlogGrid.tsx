@@ -28,7 +28,7 @@ const BlogGrid = ({ initialPosts }: BlogGridProps) => {
   const [slideDirection, setSlideDirection] = useState<"left" | "right">(
     "left"
   );
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery] = useState("");
 
   const postsPerPage = 6;
   const indexOfLastPost = currentPage * postsPerPage;
