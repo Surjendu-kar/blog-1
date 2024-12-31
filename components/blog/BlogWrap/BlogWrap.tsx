@@ -4,6 +4,7 @@ import { builder } from "@builder.io/sdk";
 import BlogCard from "./BlogCard";
 import Pagination from "./Pagination";
 import CategoryNav from "./CategoryNav";
+import CustomCard from "../CustomCard/CustomCard";
 
 interface BlogPost {
   image: string;
@@ -16,24 +17,47 @@ interface BlogPost {
   slug: string;
 }
 
+interface CustomCardData {
+  image: string;
+  tag: string;
+  time: number;
+  title: string;
+  description: string;
+  link: string;
+}
+
+export type CardType =
+  | "blog-post-card"
+  | "insight-update-card"
+  | "case-study-card";
+
 const BlogWrap = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
+  const [customCards, setCustomCards] = useState<CustomCardData[]>([]);
+  const [currentCategory, setCurrentCategory] =
+    useState<CardType>("blog-post-card");
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanging, setIsChanging] = useState(false);
   const [slideDirection, setSlideDirection] = useState<"left" | "right">(
     "left"
   );
   const [searchQuery, setSearchQuery] = useState("");
+  const [originalPosts, setOriginalPosts] = useState<BlogPost[]>([]);
+  const [originalCustomCards, setOriginalCustomCards] = useState<
+    CustomCardData[]
+  >([]);
   const postsPerPage = 6;
 
   useEffect(() => {
-    async function fetchPosts() {
-      builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
-      const builderData = await builder.getAll("blog-post-card");
+    fetchData(currentCategory);
+  }, [currentCategory]);
 
-      try {
-        // Filter data where category is 'all-cards' and transform it
+  const fetchData = async (category: CardType) => {
+    builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+    const builderData = await builder.getAll(category);
+
+    try {
+      if (category === "blog-post-card") {
         const transformedPosts = builderData
           .filter((item) => item.data?.category === "all-cards")
           .map((item) => ({
@@ -47,35 +71,73 @@ const BlogWrap = () => {
             slug: item.data?.slug ?? "",
           }));
         setPosts(transformedPosts);
-        setFilteredPosts(transformedPosts);
-      } catch (error) {
-        console.error("Transformation error:", error);
+        setOriginalPosts(transformedPosts);
+        setCustomCards([]);
+        setOriginalCustomCards([]);
+      } else {
+        const transformedCards = builderData.map((item) => ({
+          image: item.data?.image ?? "",
+          tag: item.data?.tag ?? "",
+          time: item.data?.time ?? 0,
+          title: item.data?.title ?? "",
+          description: item.data?.description ?? "",
+          link: item.data?.link ?? "#",
+        }));
+        setCustomCards(transformedCards);
+        setOriginalCustomCards(transformedCards);
+        setPosts([]);
+        setOriginalPosts([]);
       }
+      setCurrentPage(1);
+    } catch (error) {
+      console.error("Transformation error:", error);
     }
-    fetchPosts();
-  }, []);
+  };
 
-  // Handle search
+  const handleCategoryChange = (category: CardType) => {
+    setCurrentCategory(category);
+    setSearchQuery(""); // Reset search query when changing categories
+  };
+
+  // Updated search effect
   useEffect(() => {
     const query = searchQuery.toLowerCase().trim();
-    if (query === "") {
-      setFilteredPosts(posts);
+    if (currentCategory === "blog-post-card") {
+      if (query === "") {
+        setPosts(originalPosts);
+      } else {
+        const filtered = originalPosts.filter(
+          (post) =>
+            post.title.toLowerCase().includes(query) ||
+            post.description.toLowerCase().includes(query)
+        );
+        setPosts(filtered);
+      }
     } else {
-      const filtered = posts.filter(
-        (post) =>
-          post.title.toLowerCase().includes(query) ||
-          post.description.toLowerCase().includes(query)
-      );
-      setFilteredPosts(filtered);
+      if (query === "") {
+        setCustomCards(originalCustomCards);
+      } else {
+        const filtered = originalCustomCards.filter(
+          (card) =>
+            card.title.toLowerCase().includes(query) ||
+            card.description.toLowerCase().includes(query)
+        );
+        setCustomCards(filtered);
+      }
     }
     setCurrentPage(1);
-  }, [searchQuery, posts]);
+  }, [searchQuery, originalPosts, originalCustomCards]);
 
   // Calculate pagination
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
-  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+  const currentItems =
+    currentCategory === "blog-post-card" ? posts : customCards;
+  const indexOfLastItem = currentPage * postsPerPage;
+  const indexOfFirstItem = indexOfLastItem - postsPerPage;
+  const currentPageItems = currentItems.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+  const totalPages = Math.ceil(currentItems.length / postsPerPage);
 
   const handlePageChange = (pageNumber: number) => {
     setSlideDirection(pageNumber > currentPage ? "right" : "left");
@@ -93,19 +155,32 @@ const BlogWrap = () => {
 
   return (
     <div className="container mx-auto px-4">
-      <CategoryNav searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+      <CategoryNav
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        currentCategory={currentCategory}
+        onCategoryChange={handleCategoryChange}
+      />
 
-      {filteredPosts.length === 0 && (
+      {currentItems.length === 0 && (
         <div className="text-center py-8 text-gray-600">
-          No blogs found matching your search.
+          No items found matching your search.
         </div>
       )}
 
-      <BlogCard
-        posts={currentPosts}
-        slideDirection={slideDirection}
-        isChanging={isChanging}
-      />
+      {currentCategory === "blog-post-card" ? (
+        <BlogCard
+          posts={currentPageItems as BlogPost[]}
+          slideDirection={slideDirection}
+          isChanging={isChanging}
+        />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {currentPageItems.map((card, index) => (
+            <CustomCard key={index} card={card as CustomCardData} />
+          ))}
+        </div>
+      )}
 
       {totalPages > 1 && (
         <Pagination

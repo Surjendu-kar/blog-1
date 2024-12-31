@@ -1,71 +1,69 @@
-import SearchIcon from "@/public/blog-img/searchIcon.svg";
-import FilterIcon from "@/public/blog-img/filterIcon.svg";
-import Image from "next/image";
+import { type CardType } from "./BlogWrap";
 
 interface CategoryNavProps {
-  categories?: string[];
   searchQuery: string;
   onSearchChange: (query: string) => void;
+  currentCategory: CardType;
+  onCategoryChange: (category: CardType) => void;
 }
 
 const CategoryNav = ({
-  categories = [
-    "View All",
-    "Healthcare trends",
-    "AI Insights",
-    "Case Studies",
-    "Best Practices",
-  ],
   searchQuery,
   onSearchChange,
+  currentCategory,
+  onCategoryChange,
 }: CategoryNavProps) => {
+  const categories: { id: CardType; label: string }[] = [
+    { id: "blog-post-card", label: "View All" },
+    { id: "insight-update-card", label: "Insight & Updates" },
+    { id: "case-study-card", label: "Case Study" },
+  ];
+
   return (
-    <nav className="flex items-center justify-between">
-      {/* Navigation links */}
-      <ul className="flex space-x-6">
-        {categories.map((category, index) => (
-          <li key={index}>
-            <a
-              href="#"
-              className={`text-sm transition-colors duration-200 hover:text-[#00C7BE] ${
-                index === 1 ? "text-[#00C7BE]" : "text-[#595959]"
-              }`}
-            >
-              {category}
-            </a>
-          </li>
+    <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-8">
+      <div className="flex flex-wrap gap-4">
+        {categories.map((category) => (
+          <a
+            key={category.id}
+            href="#"
+            className={`text-sm transition-colors duration-200 hover:text-[#00C7BE] ${
+              currentCategory === category.id
+                ? "text-[#00C7BE]"
+                : "text-gray-600"
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
+              onCategoryChange(category.id);
+            }}
+          >
+            {category.label}
+          </a>
         ))}
-      </ul>
+      </div>
 
-      <div className="relative flex items-center">
-        {/* Search icon */}
-        <div className="absolute left-3">
-          <Image
-            src={SearchIcon}
-            alt="Search"
-            className="w-4 h-4 cursor-pointer"
-          />
-        </div>
-
-        {/* Search bar */}
+      <div className="relative w-full sm:w-auto">
         <input
-          type="search"
-          placeholder="Search..."
+          type="text"
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
-          className="pl-10 pr-12 py-2 rounded-md border border-[#00C7BE] focus:outline-none focus:border-[#00C7BE] w-64"
+          placeholder="Search..."
+          className="w-full sm:w-64 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[#00C7BE]"
         />
-
-        {/* Filter icon */}
-        <div className="absolute right-3">
-          <Image
-            src={FilterIcon}
-            alt="Filter"
-            className="w-4 h-4 cursor-pointer"
+        <svg
+          className="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
           />
-        </div>
+        </svg>
       </div>
-    </nav>
+    </div>
   );
 };
 

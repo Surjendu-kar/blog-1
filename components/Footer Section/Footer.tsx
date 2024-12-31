@@ -59,9 +59,9 @@ async function Footer() {
             <div className="flex items-center justify-center text-[#666666] text-sm gap-5">
               <p>©2024 @weframetech · All rights reserved.</p>
               <div className="flex space-x-4">
-                <p>Term of use</p>
-                <p>Privacy policy</p>
-                <p>Security</p>
+                <p className="cursor-pointer">Term of use</p>
+                <p className="cursor-pointer">Privacy policy</p>
+                <p className="cursor-pointer">Security</p>
               </div>
             </div>
           </div>

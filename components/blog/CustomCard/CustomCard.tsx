@@ -13,7 +13,7 @@ const CustomCard: FC<CardProps> = ({ card }) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg bg-white w-full">
+    <div className="flex flex-col gap-4 rounded-lg bg-white w-full hover:shadow-lg transition-all duration-300">
       {/* Card Image */}
       <div className="relative h-48 rounded-lg overflow-hidden">
         <Image
