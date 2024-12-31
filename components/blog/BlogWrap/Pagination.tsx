@@ -11,6 +11,7 @@ const Pagination = ({
 }: PaginationProps) => {
   // Generate page numbers array
   const getPageNumbers = () => {
+    
     const pages = [];
     if (totalPages <= 3) {
       for (let i = 1; i <= totalPages; i++) {
