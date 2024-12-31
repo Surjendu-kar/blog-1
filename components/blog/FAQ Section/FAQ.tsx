@@ -19,7 +19,7 @@ export default function FAQ() {
   useEffect(() => {
     async function fetchCards() {
       builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
-      const builderData = await builder.getAll("faq-data");
+      const builderData = await builder.getAll("faq");
 
       try {
         const transformedCards = builderData.map((item) => ({

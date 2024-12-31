@@ -26,16 +26,12 @@ interface CustomCardData {
   link: string;
 }
 
-export type CardType =
-  | "blog-post-card"
-  | "insight-update-card"
-  | "case-study-card";
+export type CardType = "blogs" | "insight-update-data" | "case-study-data";
 
 const BlogWrap = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [customCards, setCustomCards] = useState<CustomCardData[]>([]);
-  const [currentCategory, setCurrentCategory] =
-    useState<CardType>("blog-post-card");
+  const [currentCategory, setCurrentCategory] = useState<CardType>("blogs");
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanging, setIsChanging] = useState(false);
   const [slideDirection, setSlideDirection] = useState<"left" | "right">(
@@ -57,19 +53,17 @@ const BlogWrap = () => {
     const builderData = await builder.getAll(category);
 
     try {
-      if (category === "blog-post-card") {
-        const transformedPosts = builderData
-          .filter((item) => item.data?.category === "all-cards")
-          .map((item) => ({
-            image: item.data?.image ?? "",
-            title: item.data?.title ?? "",
-            description: item.data?.description ?? "",
-            authorName: item.data?.authorName ?? "",
-            authorImg: item.data?.authorImg ?? "",
-            tag: item.data?.tag ?? "",
-            time: item.data?.time ?? 0,
-            slug: item.data?.slug ?? "",
-          }));
+      if (category === "blogs") {
+        const transformedPosts = builderData.map((item) => ({
+          image: item.data?.image ?? "",
+          title: item.data?.title ?? "",
+          description: item.data?.description ?? "",
+          authorName: item.data?.authorName ?? "",
+          authorImg: item.data?.authorImg ?? "",
+          tag: item.data?.tag ?? "",
+          time: item.data?.time ?? 0,
+          slug: item.data?.slug ?? "",
+        }));
         setPosts(transformedPosts);
         setOriginalPosts(transformedPosts);
         setCustomCards([]);
@@ -102,7 +96,7 @@ const BlogWrap = () => {
   // Updated search effect
   useEffect(() => {
     const query = searchQuery.toLowerCase().trim();
-    if (currentCategory === "blog-post-card") {
+    if (currentCategory === "blogs") {
       if (query === "") {
         setPosts(originalPosts);
       } else {
@@ -129,8 +123,7 @@ const BlogWrap = () => {
   }, [searchQuery, originalPosts, originalCustomCards]);
 
   // Calculate pagination
-  const currentItems =
-    currentCategory === "blog-post-card" ? posts : customCards;
+  const currentItems = currentCategory === "blogs" ? posts : customCards;
   const indexOfLastItem = currentPage * postsPerPage;
   const indexOfFirstItem = indexOfLastItem - postsPerPage;
   const currentPageItems = currentItems.slice(
@@ -168,7 +161,7 @@ const BlogWrap = () => {
         </div>
       )}
 
-      {currentCategory === "blog-post-card" ? (
+      {currentCategory === "blogs" ? (
         <BlogCard
           posts={currentPageItems as BlogPost[]}
           slideDirection={slideDirection}

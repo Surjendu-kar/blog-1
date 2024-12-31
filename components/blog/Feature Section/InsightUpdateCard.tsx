@@ -14,7 +14,7 @@ const InsightUpdateCard: FC = () => {
       setIsLoading(true);
       try {
         builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
-        const builderData = await builder.getAll("insight-update-card");
+        const builderData = await builder.getAll("insight-update-data");
 
         const transformedCards = builderData.map((item) => ({
           image: item.data?.image ?? "",

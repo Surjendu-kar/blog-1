@@ -14,7 +14,7 @@ const CaseStudyCard: FC = () => {
       setIsLoading(true);
       try {
         builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
-        const builderData = await builder.getAll("case-study-card");
+        const builderData = await builder.getAll("case-study-data");
 
         const transformedCards = builderData.map((item) => ({
           image: item.data?.image ?? "",
