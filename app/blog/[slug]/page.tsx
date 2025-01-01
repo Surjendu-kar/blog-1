@@ -9,13 +9,11 @@ interface PageProps {
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
-  const content = await builder
-    .get("blog-post-section", {
-      userAttributes: {
-        urlPath: "/" + (slug?.join("/") || ""),
-      },
-    })
-    .toPromise();
+  const content = await builder.get("blog-post-section", {
+    query: {
+      "data.slug": slug,
+    },
+  });
 
   return (
     <>
@@ -23,4 +21,3 @@ export default async function Page({ params }: PageProps) {
     </>
   );
 }
-
