@@ -13,15 +13,13 @@ async function Announcement() {
   }))[0];
 
   return (
-    <div className="flex justify-center items-center bg-[#212433] text-white  gap-1 py-2 ">
-      <p className="text-md opacity-90">{announcement.title}</p>
-      <Image
-        src="/arrowUp.svg"
-        alt="Arrow Up"
-        className="w-3 h-3"
-        width={3}
-        height={3}
-      />
+    <div className="flex justify-center items-center bg-[#212433] text-white py-1.5 sm:py-2 px-2 sm:px-4">
+      <p className="inline-flex items-center text-xs sm:text-sm md:text-md opacity-90 text-center">
+        {announcement.title}
+        <span className="inline-flex items-center ml-2">
+          <Image src="/arrowUp.svg" alt="Arrow Up" width={10} height={10} />
+        </span>
+      </p>
     </div>
   );
 }
