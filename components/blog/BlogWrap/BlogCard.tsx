@@ -52,7 +52,7 @@ const BlogCard = ({
   return (
     <div className="overflow-hidden">
       <div
-        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 transform transition-transform duration-500 ease-in-out ${getSlideAnimation()}`}
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:p-6 transform transition-transform duration-500 ease-in-out ${getSlideAnimation()}`}
       >
         {posts.map((post, index) => (
           <Link

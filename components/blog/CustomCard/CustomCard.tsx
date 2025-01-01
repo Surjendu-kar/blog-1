@@ -13,15 +13,15 @@ const CustomCard: FC<CardProps> = ({ card }) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg bg-white w-full hover:shadow-lg transition-all duration-300">
+    <div className="flex flex-col gap-3 md:gap-4 rounded-lg bg-white w-full hover:shadow-lg transition-all duration-300">
       {/* Card Image */}
-      <div className="relative h-48 rounded-lg overflow-hidden">
+      <div className="relative h-40 sm:h-44 md:h-48 rounded-lg overflow-hidden">
         <Image
           src={card.image}
           alt={card.title}
           className="object-cover"
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           unoptimized={isExternalUrl(card.image)}
           loader={
             isExternalUrl(card.image)
@@ -32,30 +32,36 @@ const CustomCard: FC<CardProps> = ({ card }) => {
       </div>
 
       {/* Content Container */}
-      <div className="flex flex-col gap-3 px-3 pb-4">
+      <div className="flex flex-col gap-2 md:gap-3 px-3 pb-4">
         {/* Category and Read Time */}
-        <div className="flex items-center gap-4">
-          <span className="bg-[#00C7BE] text-white text-xs px-3 py-1 rounded-sm">
+        <div className="flex items-center gap-3 md:gap-4">
+          <span className="bg-[#00C7BE] text-white text-xs px-2.5 md:px-3 py-1 rounded-sm">
             {card.tag}
           </span>
-          <span className="text-sm text-[#000000]">{card.time} mins</span>
+          <span className="text-xs md:text-sm text-[#000000]">
+            {card.time} mins
+          </span>
         </div>
 
         {/* Title */}
-        <h3 className="text-sm font-semibold text-gray-900">{card.title}</h3>
+        <h3 className="text-sm md:text-base font-semibold text-gray-900">
+          {card.title}
+        </h3>
 
         {/* Description */}
-        <p className="text-xs text-gray-600">{card.description}</p>
+        <p className="text-xs md:text-sm text-gray-600 line-clamp-3">
+          {card.description}
+        </p>
 
         {/* Read More Link */}
-        <div className="mt-2">
+        <div className="mt-1 md:mt-2">
           <a
             href={card.link}
-            className="text-[#00C7BE] text-sm underline inline-flex items-center hover:text-[#00a59e] transition-colors"
+            className="text-[#00C7BE] text-xs md:text-sm underline inline-flex items-center hover:text-[#00a59e] transition-colors"
           >
             Read more
             <svg
-              className="w-4 h-4 ml-1"
+              className="w-3 h-3 md:w-4 md:h-4 ml-1"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

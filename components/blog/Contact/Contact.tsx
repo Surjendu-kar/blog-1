@@ -36,11 +36,9 @@ function Contact({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
-      // Don't show error for empty submission
       return;
     }
     if (validateEmail(email)) {
-      // Handle successful submission
       console.log("Valid email submitted:", email);
     } else {
       setIsValid(false);
@@ -48,7 +46,7 @@ function Contact({
   };
 
   return (
-    <div className="relative w-full h-[500px]">
+    <div className="relative w-full min-h-[400px] md:h-[500px]">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full">
         <div className="absolute inset-0 bg-black/50 z-10" />
@@ -62,10 +60,10 @@ function Contact({
       </div>
 
       {/* Content Card */}
-      <div className="relative z-20 h-full flex items-center justify-center px-4">
-        <div className="flex flex-col bg-white rounded-lg p-8 px-24 py-14 gap-5">
-          <div className="max-w-xl">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+      <div className="relative z-20 h-full flex items-center justify-center px-4 py-2">
+        <div className="flex flex-col bg-white rounded-lg  p-8 px-10 py-8 gap-5 w-full max-w-xl">
+          <div>
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2 md:mb-4">
               {title}
             </h2>
             <p className="text-gray-600 text-sm">{description}</p>
@@ -73,20 +71,20 @@ function Contact({
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-2">
             <div className="flex flex-col gap-2">
-              <div className="flex gap-5">
+              <div className="flex flex-col md:flex-row gap-3 md:gap-5">
                 <input
                   type="email"
                   value={email}
                   onChange={handleEmailChange}
                   placeholder={emailPlaceholder}
-                  className={`pl-4 pr-20 text-[#000000] py-1 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#00C7BE] focus:border-transparent ${
+                  className={`pl-4 pr-4 md:pr-20 text-[#000000] py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#00C7BE] focus:border-transparent w-full md:w-auto ${
                     !isValid && email ? "border-red-500" : "border-gray-300"
                   }`}
                 />
 
                 <button
                   type="submit"
-                  className="bg-[#00C7BE] text-white px-3 py-2 rounded-md hover:bg-[#00C7BE]/90 transition-colors"
+                  className="bg-[#00C7BE] text-white px-3 py-2 rounded-md hover:bg-[#00C7BE]/90 transition-colors w-full md:w-auto"
                 >
                   {buttonText}
                 </button>
@@ -97,7 +95,7 @@ function Contact({
                 </p>
               )}
             </div>
-            <p className="text-xs text-[#B3B3B3]">{privacyText}</p>
+            <p className="text-xs text-[#B3B3B3] mt-1">{privacyText}</p>
           </form>
         </div>
       </div>
