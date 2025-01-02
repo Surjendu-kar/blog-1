@@ -1,5 +1,6 @@
+"use client";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
 interface BlogDetailProps {
   title?: string;
@@ -28,6 +29,21 @@ const BlogDetail: FC<BlogDetailProps> = ({
   bulletPointsFontSize = "16px",
   conclusionFontSize = "16px",
 }) => {
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => {
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
+
   const isExternalUrl = (url: string): boolean => {
     try {
       new URL(url);
@@ -42,28 +58,29 @@ const BlogDetail: FC<BlogDetailProps> = ({
       {/* Title */}
       <h1
         className="font-bold mb-6 text-[#000000] capitalize"
-        style={{ fontSize: titleFontSize }}
+        style={{ fontSize: isMobile ? "25px" : titleFontSize }}
       >
         {title}
       </h1>
 
       {/* Main content */}
       <p
-        className="text-[#595959] mb-8 opacity-90"
-        style={{ fontSize: contentFontSize }}
+        className="text-[#595959] mb-8 opacity-90 leading-5"
+        style={{ fontSize: isMobile ? "14px" : contentFontSize }}
       >
         {content}
       </p>
 
       {/* Featured Image */}
       {image && (
-        <div className="relative w-full h-[400px] rounded-2xl overflow-hidden mb-8">
+        <div className="relative w-full h-[200px] sm:h-[300px] md:h-[400px] rounded-lg sm:rounded-2xl overflow-hidden mb-6 sm:mb-8">
           <Image
             src={image}
-            alt={title || ""}
+            alt={title || "Featured image"}
             className="object-cover"
             fill
-            sizes="(max-width: 896px) 100vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 768px) 100vw, 100vw"
+            priority
             unoptimized={isExternalUrl(image)}
             loader={
               isExternalUrl(image)
@@ -80,8 +97,8 @@ const BlogDetail: FC<BlogDetailProps> = ({
 
       {/* Second paragraph */}
       <p
-        className="text-[#595959] mb-8 opacity-90"
-        style={{ fontSize: secondParagraphFontSize }}
+        className="text-[#595959] mb-8 opacity-90 leading-5"
+        style={{ fontSize: isMobile ? "14px" : secondParagraphFontSize }}
       >
         {secondParagraph}
       </p>
@@ -93,7 +110,7 @@ const BlogDetail: FC<BlogDetailProps> = ({
             <li
               key={index}
               className="text-[#000000]"
-              style={{ fontSize: bulletPointsFontSize }}
+              style={{ fontSize: isMobile ? "14px" : bulletPointsFontSize }}
             >
               {item.point}
             </li>
@@ -103,8 +120,8 @@ const BlogDetail: FC<BlogDetailProps> = ({
 
       {/* Conclusion */}
       <p
-        className="text-[#595959] opacity-90"
-        style={{ fontSize: conclusionFontSize }}
+        className="text-[#595959] opacity-90 leading-5"
+        style={{ fontSize: isMobile ? "14px" : conclusionFontSize }}
       >
         {conclusion}
       </p>

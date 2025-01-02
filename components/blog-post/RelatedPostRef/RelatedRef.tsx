@@ -30,10 +30,6 @@ const RelatedRef: FC<RelatedPostProps> = ({
 }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  if (!reference || reference.length === 0) {
-    return <div>No related posts available.</div>;
-  }
-
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 640);
@@ -46,6 +42,10 @@ const RelatedRef: FC<RelatedPostProps> = ({
       window.removeEventListener("resize", checkMobile);
     };
   }, []);
+
+  if (!reference || reference.length === 0) {
+    return <div>No related posts available.</div>;
+  }
 
   return (
     <>

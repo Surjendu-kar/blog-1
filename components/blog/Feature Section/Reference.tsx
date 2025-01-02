@@ -1,56 +1,22 @@
 "use client";
-import { FC, useEffect, useState } from "react";
-import CustomCard from "../CustomCard/CustomCard";
-import { CardData } from "../CustomCard";
+import { FC, useRef, useState, useEffect } from "react";
 
-interface ReferenceData {
-  value: {
-    value: {
-      data: {
-        image: string;
-        tag: string;
-        time: number;
-        title: string;
-        description: string;
-        link: string;
-      };
-    };
-  };
+interface VideoBannerProps {
+  videoUrl?: string;
+  videoPoster?: string;
+  height?: string;
+  width?: string;
 }
 
-interface ReferenceProps {
-  reference: ReferenceData[];
-  title?: string;
-  subtitle?: string;
-  description?: string;
-  titleFontSize?: string;
-  descriptionFontSize?: string;
-}
-
-const Reference: FC<ReferenceProps> = ({
-  reference,
-  title = "BLOG",
-  subtitle,
-  description,
-  titleFontSize = "45px",
-  descriptionFontSize = "14px",
+const VideoBanner: FC<VideoBannerProps> = ({
+  videoUrl,
+  videoPoster,
+  height,
+  width,
 }) => {
-  const [showAll, setShowAll] = useState<boolean>(false);
-  const [isTransitioning, setIsTransitioning] = useState<boolean>(false);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  const hasMoreCards = reference.length > 3;
-
-  const toggleView = () => {
-    setIsTransitioning(true);
-    setShowAll(!showAll);
-
-    if (showAll) {
-      setTimeout(() => {
-        window.scrollTo({ top: window.scrollY - 500, behavior: "smooth" });
-      }, 100);
-    }
-  };
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -65,81 +31,76 @@ const Reference: FC<ReferenceProps> = ({
     };
   }, []);
 
-  if (!reference || reference.length === 0) {
-    return <div>No references available.</div>;
-  }
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
-    <>
-      {/* heading */}
-      <div className="my-10 mx-auto">
-        {subtitle && (
-          <p className="text-center text-sm text-[#00C7BE]">{subtitle}</p>
-        )}
-        <h1
-          className="font-bold text-[#000000]"
-          style={{ fontSize: isMobile ? "25px" : titleFontSize }}
-        >
-          {title}
-        </h1>
-        {description && (
-          <p
-            className="text-[#595959]"
-            style={{ fontSize: isMobile ? "12px" : descriptionFontSize }}
+    <div
+      className="relative overflow-hidden rounded-xl"
+      style={{ height: isMobile ? "250px" : height, width }}
+    >
+      {/* Video */}
+      <video
+        ref={videoRef}
+        className="absolute top-0 left-0 w-full h-full object-cover"
+        playsInline
+        poster={videoPoster}
+      >
+        <source src={videoUrl} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* Play Button */}
+      <button
+        onClick={togglePlay}
+        className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 
+                   w-12 h-12 sm:w-16 sm:h-16 bg-black/50 rounded-full flex items-center justify-center
+                   hover:bg-black/70 transition-colors duration-300"
+      >
+        {isPlaying ? (
+          // Pause Icon
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="white"
+            className="w-6 h-6 sm:w-8 sm:h-8"
           >
-            {description}
-          </p>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15.75 5.25v13.5m-7.5-13.5v13.5"
+            />
+          </svg>
+        ) : (
+          // Play Icon
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="white"
+            className="w-6 h-6 sm:w-8 sm:h-8"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347c-.75.412-1.667-.13-1.667-.986V5.653z"
+            />
+          </svg>
         )}
-      </div>
-      {/* content  */}
-      <div className="w-full max-w-[1200px] mx-auto px-3 sm:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
-          {reference.map((ref, index) => {
-            const cardData: CardData = {
-              image: ref.value.value.data.image,
-              tag: ref.value.value.data.tag,
-              time: ref.value.value.data.time,
-              title: ref.value.value.data.title,
-              description: ref.value.value.data.description,
-              link: ref.value.value.data.link,
-            };
-
-            return (
-              <div
-                key={index}
-                className={`transform transition-all duration-300 ease-in-out ${
-                  index >= 3
-                    ? showAll
-                      ? "opacity-100 scale-100 max-h-[800px] mb-3 sm:mb-6"
-                      : "opacity-0 scale-95 max-h-0 mb-0 pointer-events-none"
-                    : "opacity-100 scale-100 max-h-[800px] mb-3 sm:mb-6"
-                }`}
-                onTransitionEnd={() => setIsTransitioning(false)}
-              >
-                <CustomCard card={cardData} />
-              </div>
-            );
-          })}
-        </div>
-
-        {/* view all and view less button */}
-        {hasMoreCards && (
-          <div className="flex justify-center mt-6 pb-6 sm:mt-8">
-            <button
-              onClick={toggleView}
-              disabled={isTransitioning}
-              className="w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-2 border border-[#00C7BE] text-[#00C7BE] rounded-sm 
-                       hover:bg-[#00C7BE] hover:text-white transition-colors
-                       disabled:opacity-50 disabled:cursor-not-allowed
-                       text-sm sm:text-base mx-4 sm:mx-0"
-            >
-              {showAll ? "View less" : "View all"}
-            </button>
-          </div>
-        )}
-      </div>
-    </>
+      </button>
+    </div>
   );
 };
 
-export default Reference;
+export default VideoBanner;
