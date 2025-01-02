@@ -13,6 +13,7 @@ import NewsletterSignup from "./components/blog-post/NewsletterSignup";
 import Pagination from "./components/blog/BlogWrap/Pagination";
 import Reference from "./components/blog/Feature Section/Reference";
 import RelatedPost from "./components/blog-post/RelatedPost";
+import RelatedRef from "./components/blog-post/RelatedPostRef/RelatedRef";
 import VideoBanner from "./components/blog-post/VideoBanner";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
@@ -340,6 +341,32 @@ Builder.registerComponent(Reference, {
       type: "string",
       defaultValue: "14px",
       helperText: "Font size for the description (e.g., 14px, 1rem)",
+    },
+    {
+      name: "reference",
+      type: "list",
+      subFields: [
+        {
+          name: "value",
+          type: "reference",
+        },
+      ],
+    },
+  ],
+});
+
+Builder.registerComponent(RelatedRef, {
+  name: "RelatedRef",
+  inputs: [
+    {
+      name: "heading",
+      type: "string",
+      defaultValue: "Related Posts",
+    },
+    {
+      name: "titleFontSize",
+      type: "string",
+      defaultValue: "24px",
     },
     {
       name: "reference",

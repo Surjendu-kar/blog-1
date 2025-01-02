@@ -95,7 +95,7 @@ function Contact({
                 </p>
               )}
             </div>
-            <p className="text-xs text-[#B3B3B3] mt-1">{privacyText}</p>
+            <p className="text-xs text-[#B3B3B3] mt-1 italic">{privacyText}</p>
           </form>
         </div>
       </div>

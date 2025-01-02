@@ -1,3 +1,4 @@
+import { useEmailValidation } from "@/utils/useEmailValidation";
 import { FC } from "react";
 
 interface NewsletterSignupProps {
@@ -13,23 +14,45 @@ const NewsletterSignup: FC<NewsletterSignupProps> = ({
   buttonText,
   placeholderText,
 }) => {
+  const { email, isValid, handleEmailChange } = useEmailValidation();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    if (isValid) {
+      console.log("Valid email submitted:", email);
+    }
+  };
+
   return (
-    <div className="flex flex-col gap-4  rounded-lg max-w-[300px]">
+    <div className="flex flex-col gap-4 rounded-lg max-w-[300px]">
       <div className="space-y-2">
-        <p className="text-[#000000] text-2xl font-bold">{title}</p>
-        <p className="text-[#595959] text-sm opacity-90">{description}</p>
+        <p className="text-gray-900 text-2xl font-bold">{title}</p>
+        <p className="text-gray-600 text-sm opacity-90">{description}</p>
       </div>
 
-      <div className="flex gap-2">
+      <form onSubmit={handleSubmit} className="flex gap-2">
         <input
           type="email"
+          value={email}
+          onChange={handleEmailChange}
           placeholder={placeholderText}
-          className="px-4 py-2 rounded border border-gray-200 text-sm focus:outline-none focus:border-[#00C7BE]"
+          className={`px-4 py-2 rounded border text-black text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 ${
+            !isValid && email ? "border-red-500" : "border-gray-200"
+          }`}
         />
-        <button className="bg-[#00C7BE] text-white px-2 py-2 rounded text-sm hover:bg-[#00B3AB] transition-colors">
+        <button
+          type="submit"
+          className="bg-teal-400 text-white px-2 py-2 rounded text-sm hover:bg-teal-500 transition-colors"
+        >
           {buttonText}
         </button>
-      </div>
+      </form>
+      {!isValid && email && (
+        <p className="text-red-500 text-xs">
+          Please enter a valid email address
+        </p>
+      )}
     </div>
   );
 };
