@@ -1,28 +1,44 @@
+"use client";
 import Image from "next/image";
-import Link from "next/link";
-import { NavItemData } from "./Header";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import ArrowDown from "@/public/arrowDown.svg";
+import { NavLink } from "@/types";
 
-function MobileNavItem({
-  title,
-  url,
-  subItems,
-  onClose,
-}: NavItemData & { onClose: () => void }) {
+interface MobileNavItemProps extends NavLink {
+  onClose: () => void;
+}
+
+function MobileNavItem({ title, slug, subItems, onClose }: MobileNavItemProps) {
+  const router = useRouter();
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
   const hasSubItems = subItems && subItems.length > 0;
 
+  const handleNavigation = (path: string) => {
+    const cleanPath = path.split("/").filter(Boolean);
+    const blogIndex = cleanPath.indexOf("blog");
+
+    if (blogIndex !== -1) {
+      cleanPath.splice(
+        blogIndex + 1,
+        cleanPath.lastIndexOf("blog") - blogIndex
+      );
+    }
+
+    const finalPath = `/${cleanPath.join("/")}`;
+    router.push(finalPath);
+    onClose();
+  };
+
   return (
-    <div className="py-2 ">
+    <div className="py-2">
       <div className="flex items-center justify-between">
-        <Link
-          href={url || "#"}
-          onClick={hasSubItems ? undefined : onClose}
-          className="text-md font-medium text-[#000000] hover:text-[#00C7BE] transition-colors"
+        <span
+          onClick={() => handleNavigation(slug)}
+          className="text-md font-medium text-[#000000] hover:text-[#00C7BE] transition-colors cursor-pointer"
         >
           {title}
-        </Link>
+        </span>
         {hasSubItems && (
           <button
             type="button"
@@ -45,14 +61,13 @@ function MobileNavItem({
       {hasSubItems && isSubMenuOpen && (
         <div className="pl-4 mt-2 space-y-2">
           {subItems.map((subItem, index) => (
-            <Link
+            <span
               key={index}
-              href={subItem.url}
-              onClick={onClose}
-              className="block py-2 text-sm text-[#000000] hover:text-[#00C7BE] transition-colors"
+              onClick={() => handleNavigation(subItem.slug)}
+              className="block py-2 text-sm text-[#000000] hover:text-[#00C7BE] transition-colors cursor-pointer"
             >
-              {subItem.item}
-            </Link>
+              {subItem.title}
+            </span>
           ))}
         </div>
       )}

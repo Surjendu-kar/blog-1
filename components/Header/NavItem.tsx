@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef } from "react";
-import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import ArrowDown from "@/public/arrowDown.svg";
 
 interface NavItemProps {
@@ -11,6 +11,7 @@ interface NavItemProps {
 }
 
 export function NavItem({ title, url, subItems }: NavItemProps) {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
   const hasSubItems = subItems && subItems.length > 0;
@@ -25,7 +26,24 @@ export function NavItem({ title, url, subItems }: NavItemProps) {
   const handleMouseLeave = () => {
     timeoutRef.current = setTimeout(() => {
       setIsOpen(false);
-    }, 300); 
+    }, 300);
+  };
+
+  // here we remove blog from the path
+  const handleNavigation = (path: string) => {
+    const cleanPath = path.split("/").filter(Boolean);
+    const blogIndex = cleanPath.indexOf("blog");
+
+    if (blogIndex !== -1) {
+      cleanPath.splice(
+        blogIndex + 1,
+        cleanPath.lastIndexOf("blog") - blogIndex
+      );
+    }
+
+    // Construct the final path
+    const finalPath = `/${cleanPath.join("/")}`;
+    router.push(finalPath);
   };
 
   return (
@@ -35,9 +53,12 @@ export function NavItem({ title, url, subItems }: NavItemProps) {
       onMouseLeave={handleMouseLeave}
     >
       <div className="flex items-center gap-1 cursor-pointer">
-        <Link href={url} className="hover:text-[#00C7BE] transition-colors">
+        <span
+          onClick={() => handleNavigation(url)}
+          className="hover:text-[#00C7BE] transition-colors cursor-pointer"
+        >
           {title}
-        </Link>
+        </span>
         {hasSubItems && (
           <Image
             src={ArrowDown}
@@ -52,13 +73,13 @@ export function NavItem({ title, url, subItems }: NavItemProps) {
       {hasSubItems && isOpen && (
         <div className="absolute left-0 mt-2 py-2 bg-white shadow-lg rounded-md min-w-[200px] z-50">
           {subItems.map((subItem, index) => (
-            <Link
+            <span
               key={index}
-              href={subItem.url}
-              className="block px-4 py-2 hover:bg-gray-100 hover:text-[#00C7BE] transition-colors w-full text-left"
+              onClick={() => handleNavigation(subItem.url)}
+              className="block px-4 py-2 hover:bg-gray-100 hover:text-[#00C7BE] transition-colors w-full text-left cursor-pointer"
             >
               {subItem.item}
-            </Link>
+            </span>
           ))}
         </div>
       )}

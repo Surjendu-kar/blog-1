@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import { NavItemData } from "./Header";
 import MenuBar from "@/public/menubar.svg";
 import CloseIcon from "@/public/closeicon.svg";
 import Image from "next/image";
 import MobileNavItem from "./MobileNavItem";
+import { NavLink } from "@/types";
 
-function MobileMenu({ items }: { items: NavItemData[] }) {
+function MobileMenu({ items }: { items: NavLink[] }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -55,8 +55,8 @@ function MobileMenu({ items }: { items: NavItemData[] }) {
               {items.map((item, index) => (
                 <MobileNavItem
                   key={index}
-                  title={item.title || ""}
-                  url={item.url || ""}
+                  title={item.title}
+                  slug={item.slug}
                   subItems={item.subItems}
                   onClose={() => setIsOpen(false)}
                 />
@@ -65,18 +65,10 @@ function MobileMenu({ items }: { items: NavItemData[] }) {
 
             {/* Mobile Menu Footer */}
             <div className="p-4 flex flex-col space-y-2">
-              <button
-                className="w-full border border-[#00C7BE] text-[#00C7BE] px-4 py-3 rounded-md capitalize hover:bg-[#00C7BE] hover:text-white transition-colors"
-                aria-label="Login to your account"
-                title="Login to your account"
-              >
+              <button className="w-full border border-[#00C7BE] text-[#00C7BE] px-4 py-3 rounded-md capitalize hover:bg-[#00C7BE] hover:text-white transition-colors">
                 login
               </button>
-              <button
-                className="w-full bg-[#00C7BE] text-white px-4 py-3 rounded-md capitalize hover:bg-[#00C7BE]/90 transition-colors"
-                aria-label="Register new account"
-                title="Register new account"
-              >
+              <button className="w-full bg-[#00C7BE] text-white px-4 py-3 rounded-md capitalize hover:bg-[#00C7BE]/90 transition-colors">
                 register now
               </button>
             </div>

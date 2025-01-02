@@ -1,16 +1,39 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { builder } from "@builder.io/sdk";
 import Image from "next/image";
 
-builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+interface AnnouncementData {
+  title: string;
+}
 
-async function Announcement() {
-  const builderData = await builder.getAll("announcement-data", {
-    prerender: false,
+export default function Announcement() {
+  const [announcement, setAnnouncement] = useState<AnnouncementData>({
+    title: "",
   });
 
-  const announcement = builderData.map((item) => ({
-    title: item.data?.title || "",
-  }))[0];
+  useEffect(() => {
+    const fetchAnnouncement = async () => {
+      try {
+        builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+
+        const builderData = await builder.getAll("announcement-data", {
+          cachebust: true,
+        });
+
+        const announcementData = builderData.map((item) => ({
+          title: item.data?.title || "",
+        }))[0];
+
+        setAnnouncement(announcementData);
+      } catch (error) {
+        console.error("Error fetching announcement:", error);
+      }
+    };
+
+    fetchAnnouncement();
+  }, []);
 
   return (
     <div className="flex justify-center items-center bg-[#212433] text-white py-1.5 sm:py-2 px-2 sm:px-4">
@@ -23,5 +46,3 @@ async function Announcement() {
     </div>
   );
 }
-
-export default Announcement;

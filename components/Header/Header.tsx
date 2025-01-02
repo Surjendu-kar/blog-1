@@ -1,30 +1,67 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Logo from "@/public/header-img/logo.svg";
 import LightDark from "@/public/header-img/lightDark.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { builder, BuilderContent } from "@builder.io/sdk";
+import { builder } from "@builder.io/sdk";
 import Announcement from "../blog/Announcement/Announcement";
 import { NavItem } from "./NavItem";
 import MobileMenu from "./MobileMenu";
+import { NavLink, NavLinkContent } from "@/types";
 
-export interface NavItemData {
-  title?: string;
-  url?: string;
-  subItems?: { item: string; url: string }[];
-}
+export default function Header() {
+  const [navItems, setNavItems] = useState<NavLink[]>([]);
 
-export default async function Header() {
-  builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
+  useEffect(() => {
+    const fetchNavLinks = async () => {
+      builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
-  const builderData = await builder.getAll("nav-data", {
-    prerender: false,
-  });
+      try {
+        const navLinks = (await builder.getAll("navlink", {
+          cachebust: true,
+          options: {
+            includeRefs: true,
+          },
+        })) as NavLinkContent[];
 
-  const navItems = [...builderData].reverse().map((item: BuilderContent) => ({
-    title: (item.data as NavItemData).title || item.name || "",
-    url: (item.data as NavItemData).url || "",
-    subItems: (item.data as NavItemData).subItems || [],
-  }));
+        const processedNavLinks = navLinks.map((link) => {
+          const title = link.data?.title;
+          const slug = `blog/${link.data?.slug?.Default?.value?.data?.slug}`;
+
+          const subItems =
+            link.data?.subItems?.map((subItem) => ({
+              title: subItem?.title,
+              slug: `blog/${subItem?.slug?.value?.data?.slug}`,
+            })) || [];
+
+          return {
+            title,
+            slug,
+            subItems,
+          } as NavLink;
+        });
+
+        const reversedNavItems = [...processedNavLinks]
+          .reverse()
+          .map((item) => ({
+            title: item.title,
+            slug: item.slug,
+            subItems: item.subItems.map((sub) => ({
+              title: sub.title,
+              slug: sub.slug,
+            })),
+          }));
+
+        setNavItems(reversedNavItems);
+      } catch (error) {
+        console.error("Error fetching nav links:", error);
+      }
+    };
+
+    fetchNavLinks();
+  }, []);
 
   return (
     <>
@@ -48,8 +85,11 @@ export default async function Header() {
               <NavItem
                 key={index}
                 title={item.title}
-                url={item.url}
-                subItems={item.subItems}
+                url={item.slug}
+                subItems={item.subItems.map((sub) => ({
+                  item: sub.title,
+                  url: sub.slug,
+                }))}
               />
             ))}
           </div>
@@ -71,7 +111,16 @@ export default async function Header() {
           </div>
 
           {/* Mobile Menu Button */}
-          <MobileMenu items={navItems} />
+          <MobileMenu
+            items={navItems.map((link) => ({
+              title: link.title,
+              slug: link.slug,
+              subItems: link.subItems.map((sub) => ({
+                title: sub.title,
+                slug: sub.slug,
+              })),
+            }))}
+          />
         </div>
       </header>
     </>
