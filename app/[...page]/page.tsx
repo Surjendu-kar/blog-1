@@ -56,7 +56,6 @@ export const generateMetadata = async ({
         "Explore our collection of blogs, insights, case studies, and FAQs",
     },
   };
-  // console.log(metaData);
   return metaData;
 };
 

@@ -26,7 +26,7 @@ const CategoryNav = ({
           <a
             key={category.id}
             href="#"
-            className={`text-sm transition-colors duration-200 hover:text-[#00C7BE] ${
+            className={`text-xs sm:text-sm transition-colors duration-200 hover:text-[#00C7BE] ${
               currentCategory === category.id
                 ? "text-[#00C7BE]"
                 : "text-gray-600"
@@ -47,10 +47,10 @@ const CategoryNav = ({
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Search..."
-          className="w-full sm:w-64 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-[#00C7BE]"
+          className="w-full sm:w-64 px-3 sm:px-4 py-1.5 sm:py-2 text-sm rounded-md sm:rounded-lg border border-gray-300 focus:outline-none focus:border-[#00C7BE]"
         />
         <svg
-          className="absolute right-4 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
+          className="absolute right-3 sm:right-4 top-1/2 transform -translate-y-1/2 w-3.5 sm:w-4 h-3.5 sm:h-4 text-gray-400"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
