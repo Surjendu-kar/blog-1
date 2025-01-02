@@ -11,6 +11,7 @@ import Heading from "./components/Heading/Heading";
 import InsightUpdateCard from "./components/blog/Feature Section/InsightUpdateCard";
 import NewsletterSignup from "./components/blog-post/NewsletterSignup";
 import Pagination from "./components/blog/BlogWrap/Pagination";
+import Reference from "./components/blog/Feature Section/Reference";
 import RelatedPost from "./components/blog-post/RelatedPost";
 import VideoBanner from "./components/blog-post/VideoBanner";
 
@@ -305,6 +306,50 @@ Builder.registerComponent(VideoBanner, {
       defaultValue: "100%",
       enum: ["100%", "75%", "50%", "25%"],
       helperText: "Width of the video banner",
+    },
+  ],
+});
+
+Builder.registerComponent(Reference, {
+  name: "Reference",
+  inputs: [
+    {
+      name: "subtitle",
+      type: "string",
+      defaultValue: "BLOG",
+      helperText: "Optional subtitle text displayed above the title",
+    },
+    {
+      name: "title",
+      type: "string",
+      helperText: "Main title text",
+    },
+    {
+      name: "description",
+      type: "longText",
+      helperText: "Optional description text displayed below the title",
+    },
+    {
+      name: "titleFontSize",
+      type: "string",
+      defaultValue: "50px",
+      helperText: "Font size for the title (e.g., 50px, 3rem)",
+    },
+    {
+      name: "descriptionFontSize",
+      type: "string",
+      defaultValue: "14px",
+      helperText: "Font size for the description (e.g., 14px, 1rem)",
+    },
+    {
+      name: "reference",
+      type: "list",
+      subFields: [
+        {
+          name: "value",
+          type: "reference",
+        },
+      ],
     },
   ],
 });

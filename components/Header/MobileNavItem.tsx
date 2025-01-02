@@ -25,8 +25,10 @@ function MobileNavItem({
         </Link>
         {hasSubItems && (
           <button
+            type="button"
             onClick={() => setIsSubMenuOpen(!isSubMenuOpen)}
             className="p-2 text-gray-600"
+            title="Toggle submenu"
           >
             <Image
               src={ArrowDown}
