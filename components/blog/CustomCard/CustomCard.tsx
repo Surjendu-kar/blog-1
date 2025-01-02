@@ -13,7 +13,7 @@ const CustomCard: FC<CardProps> = ({ card }) => {
   };
 
   return (
-    <div className="flex flex-col gap-3 sm:gap-4 rounded-lg bg-white w-full hover:shadow-lg transition-all duration-300">
+    <div className="group flex flex-col gap-3 sm:gap-4 rounded-lg bg-white w-full hover:shadow-lg transition-all duration-300">
       {/* Card Image */}
       <div className="relative h-40 sm:h-44 sm:h-48 rounded-lg overflow-hidden">
         <Image
@@ -57,7 +57,7 @@ const CustomCard: FC<CardProps> = ({ card }) => {
         <div className="mt-1 sm:mt-2">
           <a
             href={card.link}
-            className="text-[#00C7BE] text-xs sm:text-sm underline inline-flex items-center hover:text-[#00a59e] transition-colors"
+            className="text-[#00C7BE] text-xs sm:text-sm underline inline-flex items-center group-hover:text-[#00a59e] group-hover:scale-110 transition-all duration-300 origin-left"
           >
             Read more
             <svg
