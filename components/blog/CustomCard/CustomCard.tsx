@@ -32,7 +32,7 @@ const CustomCard: FC<CardProps> = ({ card }) => {
       </div>
 
       {/* Content Container */}
-      <div className="flex flex-col gap-2 sm:gap-3 px-3 pb-4">
+      <div className="flex flex-col gap-2 sm:gap-3 px-3 pb-4 text-left">
         {/* Category and Read Time */}
         <div className="flex items-center gap-3 sm:gap-4">
           <span className="bg-[#00C7BE] text-white text-xs px-2.5 sm:px-3 py-1 rounded-sm">

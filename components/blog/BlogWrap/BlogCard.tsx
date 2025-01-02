@@ -60,7 +60,6 @@ const BlogCard = ({
             key={index}
             className="flex flex-col rounded-lg overflow-hidden bg-white hover:shadow-lg transition-all duration-300"
           >
-            {/* Blog image */}
             <div className="relative w-full h-40 sm:h-48">
               <Image
                 src={post.image}
@@ -77,15 +76,14 @@ const BlogCard = ({
             </div>
 
             <div className="p-3 sm:p-4 flex flex-col gap-2 sm:gap-3">
-              {/* Title */}
-              <h3 className="text-base sm:text-lg font-semibold line-clamp-2">{post.title}</h3>
+              <h3 className="text-base sm:text-lg font-semibold line-clamp-2 text-left">
+                {post.title}
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-600 line-clamp-3 text-left">
+                {post.description}
+              </p>
 
-              {/* Description */}
-              <p className="text-xs sm:text-sm text-gray-600 line-clamp-3">{post.description}</p>
-
-              {/* Author and Tags Row */}
-              <div className="flex items-center gap-1.5 sm:gap-2 mt-1 sm:mt-2">
-                {/* Author Section */}
+              <div className="flex items-center justify-start gap-1.5 sm:gap-2 mt-1 sm:mt-2">
                 <div className="flex items-center gap-1.5 sm:gap-2 flex-1">
                   <div className="relative w-6 h-6 sm:w-8 sm:h-8 rounded-full overflow-hidden">
                     <Image
@@ -106,13 +104,11 @@ const BlogCard = ({
                   </span>
                 </div>
 
-                {/* Tag */}
-                <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-teal-400 text-white text-[10px] sm:text-xs rounded-full whitespace-nowrap">
+                <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-teal-400 text-white text-[10px] sm:text-xs rounded-full">
                   {post.tag}
                 </span>
 
-                {/* Reading Time */}
-                <span className="text-xs sm:text-sm text-gray-500 whitespace-nowrap">
+                <span className="text-xs sm:text-sm text-gray-500">
                   {post.time} mins
                 </span>
               </div>
