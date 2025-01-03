@@ -2,7 +2,7 @@
 import { FC, useEffect, useState } from "react";
 import CustomCard from "../CustomCard/CustomCard";
 import { CardData } from "../CustomCard";
-interface ReferenceData {
+interface FeatureRefData {
   value: {
     value: {
       data: {
@@ -16,15 +16,15 @@ interface ReferenceData {
     };
   };
 }
-interface ReferenceProps {
-  reference?: ReferenceData[];
+interface FeatureRefProps {
+  reference?: FeatureRefData[];
   title?: string;
   subtitle?: string;
   description?: string;
   titleFontSize?: string;
   descriptionFontSize?: string;
 }
-const Reference: FC<ReferenceProps> = ({
+const FeatureRef: FC<FeatureRefProps> = ({
   reference = [],
   title = "BLOG",
   subtitle,
@@ -58,6 +58,7 @@ const Reference: FC<ReferenceProps> = ({
   if (!reference || reference.length === 0) {
     return <div>No references available.</div>;
   }
+  console.log(reference);
   return (
     <>
       {/* heading */}
@@ -128,4 +129,4 @@ const Reference: FC<ReferenceProps> = ({
     </>
   );
 };
-export default Reference;
+export default FeatureRef;

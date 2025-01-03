@@ -7,13 +7,14 @@ import CategoryName from "./components/blog-post/CategoryName";
 import CategoryNav from "./components/blog/BlogWrap/CategoryNav";
 import Contact from "./components/blog/Contact/Contact";
 import FAQ from "./components/blog/FAQ Section/FAQ";
+import FeatureRef from "./components/blog/Feature Section/FeatureRef";
 import Heading from "./components/Heading/Heading";
 import InsightUpdateCard from "./components/blog/Feature Section/InsightUpdateCard";
 import NewsletterSignup from "./components/blog-post/NewsletterSignup";
 import Pagination from "./components/blog/BlogWrap/Pagination";
-import Reference from "./components/blog/Feature Section/Reference";
 import RelatedPost from "./components/blog-post/RelatedPost";
 import RelatedRef from "./components/blog-post/RelatedPostRef/RelatedRef";
+import SocialInfo from "./components/blog-post/SocialInfo";
 import VideoBanner from "./components/blog-post/VideoBanner";
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
@@ -311,8 +312,8 @@ Builder.registerComponent(VideoBanner, {
   ],
 });
 
-Builder.registerComponent(Reference, {
-  name: "Reference",
+Builder.registerComponent(FeatureRef, {
+  name: "FeatureRef",
   inputs: [
     {
       name: "subtitle",
@@ -377,6 +378,67 @@ Builder.registerComponent(RelatedRef, {
           type: "reference",
         },
       ],
+    },
+  ],
+});
+
+Builder.registerComponent(SocialInfo, {
+  name: "SocialInfo",
+  inputs: [
+    {
+      name: "author",
+      type: "string",
+      required: true,
+      defaultValue: "Bernd Holbein",
+    },
+    {
+      name: "avatarUrl",
+      type: "file",
+      required: true,
+      defaultValue:
+        "https://cdn.builder.io/api/v1/image/assets%2F76cb628f6d0c4bb38273da6779617caf%2F0c75df2bd5f943398608b5f7c35ad77b",
+    },
+    {
+      name: "date",
+      type: "string",
+      required: true,
+      defaultValue: "11 Nov 2024",
+    },
+    {
+      name: "readingTime",
+      type: "string",
+      required: true,
+      defaultValue: "12 mins",
+    },
+    {
+      name: "tag",
+      type: "string",
+      required: true,
+      defaultValue: "AI Healthcare",
+    },
+    {
+      name: "facebookUrl",
+      type: "string",
+      required: true,
+      defaultValue: "",
+    },
+    {
+      name: "link",
+      type: "string",
+      required: true,
+      defaultValue: "",
+    },
+    {
+      name: "linkedinUrl",
+      type: "string",
+      required: true,
+      defaultValue: "",
+    },
+    {
+      name: "twitterUrl",
+      type: "string",
+      required: true,
+      defaultValue: "",
     },
   ],
 });
