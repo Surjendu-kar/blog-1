@@ -73,34 +73,35 @@ export default async function BlogPostPage({ params }: PageProps) {
   return (
     <div className="bg-white">
       {/* heading */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="max-w-3xl mx-auto mb-5">
+      <div className="container mx-auto px-2 py-4">
+        <div className="max-w-3xl mx-auto mb-3 sm:mb-5">
           <Link
             href="/blog"
-            className="inline-flex items-center text-[#00C7BE] hover:text-teal-600 mb-2"
+            className="inline-flex items-center text-[#00C7BE] hover:text-teal-600 mb-2 text-sm sm:text-base pl-2"
           >
             <span className="mr-1">&#60;</span>
             <span>All post</span>
           </Link>
-
-          <div className="flex flex-col items-center justify-center">
-            <h1 className="text-[25px] sm:text-[40px] font-bold  text-black capitalize">
+          <div className="flex flex-col">
+            <h1 className="text-[20px] sm:text-[50px] font-bold text-black capitalize px-2 mb-3 ">
               {blogData.data?.title}
             </h1>
 
-            <div className="flex items-center gap-4">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-4 justify-center">
               <div className="flex items-center gap-2">
                 <img
                   src={blogData.data?.authorImg}
                   alt={blogData.data?.authorName}
-                  className="w-8 h-8 rounded-full object-cover border-2 border-gray-500"
+                  className="w-6 h-6 sm:w-8 sm:h-8 rounded-full object-cover border-2 border-gray-500"
                 />
-                <span className="text-gray-700">
+                <span className="text-gray-700 text-sm sm:text-base">
                   {blogData.data?.authorName}
                 </span>
               </div>
-              <span className="text-gray-500">{blogData.data?.time} mins</span>
-              <span className="bg-teal-400 text-white px-3 py-1 rounded-full text-sm">
+              <span className="text-gray-700 text-sm sm:text-base">
+                {blogData.data?.time} mins
+              </span>
+              <span className="text-gray-700 text-sm sm:text-base">
                 {blogData.data?.tag}
               </span>
             </div>
@@ -109,15 +110,15 @@ export default async function BlogPostPage({ params }: PageProps) {
       </div>
 
       {/* Image Section */}
-      <div className="w-full mb-8">
-        <div className="max-w-4xl mx-auto">
+      <div className="w-full mb-4 px-2">
+        <div className="max-w-5xl mx-auto">
           <div className="relative w-full aspect-video rounded-lg overflow-hidden">
             <Image
               src={blogData.data?.image || ""}
               alt={blogData.data?.title || "Blog featured image"}
               fill
               className="object-cover"
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              sizes="(max-width: 640px) 92vw, (max-width: 1024px) 95vw, 100vw"
               priority
             />
           </div>
