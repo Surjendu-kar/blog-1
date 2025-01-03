@@ -14,7 +14,7 @@ const CategoryNav = ({
   onCategoryChange,
 }: CategoryNavProps) => {
   const categories: { id: CardType; label: string }[] = [
-    { id: "blogs", label: "View All" },
+    { id: "blogs-data", label: "View All" },
     { id: "insight-update-data", label: "Insight & Updates" },
     { id: "case-study-data", label: "Case Study" },
   ];

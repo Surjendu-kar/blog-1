@@ -26,12 +26,12 @@ interface CustomCardData {
   link: string;
 }
 
-export type CardType = "blogs" | "insight-update-data" | "case-study-data";
+export type CardType = "blogs-data" | "insight-update-data" | "case-study-data";
 
 const BlogWrap = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [customCards, setCustomCards] = useState<CustomCardData[]>([]);
-  const [currentCategory, setCurrentCategory] = useState<CardType>("blogs");
+  const [currentCategory, setCurrentCategory] = useState<CardType>("blogs-data");
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanging, setIsChanging] = useState(false);
   const [slideDirection, setSlideDirection] = useState<"left" | "right">(
@@ -53,7 +53,7 @@ const BlogWrap = () => {
     const builderData = await builder.getAll(category);
 
     try {
-      if (category === "blogs") {
+      if (category === "blogs-data") {
         const transformedPosts = builderData.map((item) => ({
           image: item.data?.image ?? "",
           title: item.data?.title ?? "",
@@ -96,7 +96,7 @@ const BlogWrap = () => {
   // Updated search effect
   useEffect(() => {
     const query = searchQuery.toLowerCase().trim();
-    if (currentCategory === "blogs") {
+    if (currentCategory === "blogs-data") {
       if (query === "") {
         setPosts(originalPosts);
       } else {
@@ -123,7 +123,7 @@ const BlogWrap = () => {
   }, [searchQuery, originalPosts, originalCustomCards]);
 
   // Calculate pagination
-  const currentItems = currentCategory === "blogs" ? posts : customCards;
+  const currentItems = currentCategory === "blogs-data" ? posts : customCards;
   const indexOfLastItem = currentPage * postsPerPage;
   const indexOfFirstItem = indexOfLastItem - postsPerPage;
   const currentPageItems = currentItems.slice(
@@ -161,7 +161,7 @@ const BlogWrap = () => {
         </div>
       )}
 
-      {currentCategory === "blogs" ? (
+      {currentCategory === "blogs-data" ? (
         <BlogCard
           posts={currentPageItems as BlogPost[]}
           slideDirection={slideDirection}
