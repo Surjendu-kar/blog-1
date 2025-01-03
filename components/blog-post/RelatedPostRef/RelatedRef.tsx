@@ -18,13 +18,13 @@ interface ReferenceData {
 }
 
 interface RelatedPostProps {
-  reference: ReferenceData[];
+  reference?: ReferenceData[];
   heading?: string;
   titleFontSize?: string;
 }
 
 const RelatedRef: FC<RelatedPostProps> = ({
-  reference,
+  reference = [],
   heading = "Related Posts",
   titleFontSize = "24px",
 }) => {
@@ -62,12 +62,12 @@ const RelatedRef: FC<RelatedPostProps> = ({
       <div className="flex flex-col gap-4">
         {reference.map((ref, index) => {
           const cardData: CardData = {
-            title: ref.value.value.data.title,
-            description: ref.value.value.data.description,
-            authorImg: ref.value.value.data.authorImg,
-            authorName: ref.value.value.data.authorName,
-            tag: ref.value.value.data.tag,
-            time: ref.value.value.data.time,
+            title: ref?.value?.value?.data?.title,
+            description: ref?.value?.value?.data?.description,
+            authorImg: ref?.value?.value?.data?.authorImg,
+            authorName: ref?.value?.value?.data?.authorName,
+            tag: ref?.value?.value?.data?.tag,
+            time: ref?.value?.value?.data?.time,
           };
 
           return (
