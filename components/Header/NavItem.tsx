@@ -29,7 +29,6 @@ export function NavItem({ title, url, subItems }: NavItemProps) {
     }, 300);
   };
 
-  // here we remove blog from the path
   const handleNavigation = (path: string) => {
     const cleanPath = path.split("/").filter(Boolean);
     const blogIndex = cleanPath.indexOf("blog");
@@ -41,7 +40,6 @@ export function NavItem({ title, url, subItems }: NavItemProps) {
       );
     }
 
-    // Construct the final path
     const finalPath = `/${cleanPath.join("/")}`;
     router.push(finalPath);
   };
