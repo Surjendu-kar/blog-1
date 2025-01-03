@@ -16,9 +16,9 @@ function CategoryName({
   tag,
 }: CategoryNameProps) {
   return (
-    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 justify-center">
       {/* Author Section */}
-      <div className="relative h-6 w-6 shrink-0 overflow-hidden rounded-full sm:h-8 sm:w-8">
+      <div className="relative h-6 w-6 shrink-0 overflow-hidden rounded-full">
         <Image
           src={avatarUrl}
           alt={`${author}'s avatar`}

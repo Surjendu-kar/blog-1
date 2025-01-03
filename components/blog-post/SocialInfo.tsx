@@ -25,37 +25,24 @@ const SocialInfo = ({
   link = "",
 }: SocialInfoProps) => {
   return (
-    <div className="flex w-full max-w-[75rem] items-center justify-between gap-4 smCustom:flex-col smCustom:items-start smCustom:gap-6">
-      <div className="flex w-full flex-wrap items-center gap-6 smCustom:justify-between">
-        <CategoryName
-          avatarUrl={avatarUrl}
-          author={author}
-          date={date}
-          readingTime={readingTime}
-          tag={tag}
-        />
-      </div>
+    <div className="flex flex-col lg:flex-row w-full items-center justify-between gap-3 lg:gap-0">
+      <CategoryName
+        avatarUrl={avatarUrl}
+        author={author}
+        date={date}
+        readingTime={readingTime}
+        tag={tag}
+      />
+
       <div className="flex items-center gap-4">
         <Link href={link} className="transition-transform hover:scale-110">
-          <Image
-            src="/blog-img/link.png"
-            alt="Link"
-            width={40}
-            height={40}
-            quality={40}
-          />
+          <Image src="/blog-img/link.png" alt="Link" width={20} height={20} className="sm:w-[30px] sm:h-[30px]" />
         </Link>
         <Link
           href={twitterUrl}
           className="transition-transform hover:scale-110"
         >
-          <Image
-            src="/blog-img/x.png"
-            alt="Link"
-            width={40}
-            height={40}
-            quality={40}
-          />
+          <Image src="/blog-img/x.png" alt="Link" width={20} height={20} className="sm:w-[30px] sm:h-[30px]" />
         </Link>
         <Link
           href={linkedinUrl}
@@ -64,9 +51,9 @@ const SocialInfo = ({
           <Image
             src="/blog-img/linkedin.png"
             alt="Link"
-            width={40}
-            height={40}
-            quality={40}
+            width={20}
+            height={20}
+            className="sm:w-[30px] sm:h-[30px]"
           />
         </Link>
         <Link
@@ -76,9 +63,9 @@ const SocialInfo = ({
           <Image
             src="/blog-img/facebook.png"
             alt="Link"
-            width={40}
-            height={40}
-            quality={40}
+            width={20}
+            height={20}
+            className="sm:w-[30px] sm:h-[30px]"
           />
         </Link>
       </div>
