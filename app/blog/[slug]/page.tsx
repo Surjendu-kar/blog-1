@@ -6,9 +6,7 @@ import Link from "next/link";
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
 interface PageProps {
-  params: {
-    slug: string;
-  };
+  params: { slug: string[] };
 }
 
 interface BlogData {
@@ -70,6 +68,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <div className="bg-white">
+      {/* heading */}
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto mb-5">
           <Link
@@ -105,7 +104,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Featured Image Section */}
+      {/* Image Section */}
       <div className="w-full mb-8">
         <div className="max-w-4xl mx-auto">
           <div className="relative w-full aspect-video rounded-lg overflow-hidden">
