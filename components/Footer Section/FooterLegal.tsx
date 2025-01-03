@@ -1,19 +1,5 @@
-// FooterLegal.tsx
-import { builder, BuilderContent } from "@builder.io/sdk";
-
-interface LegalLink {
-  label: string;
-  url: string;
-}
-
-interface FooterLegalData {
-  copyrightText: string;
-  legalLinks: LegalLink[];
-}
-
-interface FooterLegalContent extends BuilderContent {
-  data: FooterLegalData;
-}
+import { FooterLegalContent } from "@/types";
+import { builder } from "@builder.io/sdk";
 
 async function FooterLegal() {
   builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);

@@ -1,21 +1,6 @@
-import { builder, BuilderContent } from "@builder.io/sdk";
+import { builder } from "@builder.io/sdk";
 import FooterLegal from "./FooterLegal";
-
-interface SubItem {
-  item: string;
-  url: string;
-}
-
-interface FooterData {
-  heading: string;
-  subItems: SubItem[];
-  url: string;
-}
-
-interface CustomBuilderContent extends BuilderContent {
-  data: FooterData;
-  name: string;
-}
+import { CustomBuilderContent } from "@/types";
 
 async function Footer() {
   builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
