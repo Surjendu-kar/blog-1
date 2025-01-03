@@ -47,6 +47,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         query: {
           "data.slug": resolvedParams.slug,
         },
+        cachebust: true,
       })
       .promise() as Promise<BlogData>,
 
@@ -55,6 +56,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         query: {
           "data.slug": resolvedParams.slug,
         },
+        cachebust: true,
       })
       .promise() as Promise<SectionContent>,
   ]);
@@ -74,7 +76,7 @@ export default async function BlogPostPage({ params }: PageProps) {
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-3xl mx-auto mb-5">
           <Link
-            href="/mydata"
+            href="/blog"
             className="inline-flex items-center text-[#00C7BE] hover:text-teal-600 mb-2"
           >
             <span className="mr-1">&#60;</span>
