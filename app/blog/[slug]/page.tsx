@@ -6,7 +6,7 @@ import Link from "next/link";
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
 interface PageProps {
-  params: { slug: string[] };
+  params: Promise<{ slug: string[] }>;
 }
 
 interface BlogData {
@@ -39,11 +39,13 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
+  const resolvedParams = await params;
+
   const [blogData, sectionContent] = await Promise.all([
     builder
       .get("blogs-data", {
         query: {
-          "data.slug": params.slug,
+          "data.slug": resolvedParams.slug,
         },
       })
       .promise() as Promise<BlogData>,
@@ -51,7 +53,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     builder
       .get("new-blog-post-section", {
         query: {
-          "data.slug": params.slug,
+          "data.slug": resolvedParams.slug,
         },
       })
       .promise() as Promise<SectionContent>,
