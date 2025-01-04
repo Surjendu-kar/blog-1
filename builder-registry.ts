@@ -1,21 +1,22 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
-import BlogDetail from "./components/blog-post/BlogDetails";
-import BlogWrap from "./components/blog/blogWrap/BlogWrap";
-import CaseStudyCard from "./components/blog/feature/CaseStudyCard";
-import CategoryName from "./components/blog-post/CategoryName";
-import Contact from "./components/contact/Contact";
-import FAQ from "./components/blog/faq/FAQ";
-import FeatureRef from "./components/blog/feature/FeatureRef";
-import Heading from "./components/blog/heading/Heading";
-import InsightUpdateCard from "./components/blog/feature/InsightUpdateCard";
-import NewsletterSignup from "./components/blog-post/NewsletterSignup";
-import RelatedPost from "./components/blog-post/RelatedPost";
-import RelatedRef from "./components/blog-post/relatedPostRef/RelatedRef";
-import SocialInfo from "./components/blog-post/SocialInfo";
-import VideoBanner from "./components/blog-post/VideoBanner";
 import CategoryNav from "./components/blog/BlogWrap/CategoryNav";
 import Pagination from "./components/blog/BlogWrap/Pagination";
+import InsightUpdateCard from "./components/blog/feature/InsightUpdateCard";
+import CaseStudyCard from "./components/blog/feature/CaseStudyCard";
+import Contact from "./components/contact/Contact";
+import FAQ from "./components/blog/faq/FAQ";
+import Heading from "./components/blog/heading/Heading";
+import BlogWrap from "./components/blog/BlogWrap/BlogWrap";
+import CategoryName from "./components/blog-post/CategoryName";
+import BlogDetail from "./components/blog-post/BlogDetails";
+import RelatedPost from "./components/blog-post/RelatedPost";
+import NewsletterSignup from "./components/blog-post/NewsletterSignup";
+import VideoBanner from "./components/blog-post/VideoBanner";
+import FeatureRef from "./components/blog/feature/FeatureRef";
+import RelatedRef from "./components/blog-post/relatedPostRef/RelatedRef";
+import SocialInfo from "./components/blog-post/SocialInfo";
+
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
