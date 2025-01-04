@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: PageProps) {
             <span>All post</span>
           </Link>
           <div className="flex flex-col">
-            <h1 className="text-[25px] sm:text-[50px] font-bold text-black capitalize mb-3 ">
+            <h1 className="text-[25px] sm:text-[50px] font-bold text-black capitalize mb-3 text-center">
               {blogData.data?.title}
             </h1>
 

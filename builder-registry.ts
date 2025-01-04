@@ -1,13 +1,11 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
-import CategoryNav from "./components/blog/BlogWrap/CategoryNav";
-import Pagination from "./components/blog/BlogWrap/Pagination";
 import InsightUpdateCard from "./components/blog/feature/InsightUpdateCard";
 import CaseStudyCard from "./components/blog/feature/CaseStudyCard";
 import Contact from "./components/contact/Contact";
 import FAQ from "./components/blog/faq/FAQ";
 import Heading from "./components/blog/heading/Heading";
-import BlogWrap from "./components/blog/BlogWrap/BlogWrap";
+import BlogWrap from "./components/blog/blogWrap/BlogWrap";
 import CategoryName from "./components/blog-post/CategoryName";
 import BlogDetail from "./components/blog-post/BlogDetails";
 import RelatedPost from "./components/blog-post/RelatedPost";
@@ -16,6 +14,8 @@ import VideoBanner from "./components/blog-post/VideoBanner";
 import FeatureRef from "./components/blog/feature/FeatureRef";
 import RelatedRef from "./components/blog-post/relatedPostRef/RelatedRef";
 import SocialInfo from "./components/blog-post/SocialInfo";
+import CategoryNav from "./components/blog/blogWrap/CategoryNav";
+import Pagination from "./components/blog/blogWrap/Pagination";
 
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
