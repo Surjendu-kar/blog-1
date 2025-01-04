@@ -4,7 +4,7 @@ import { builder } from "@builder.io/sdk";
 import BlogCard from "./BlogCard";
 import Pagination from "./Pagination";
 import CategoryNav from "./CategoryNav";
-import CustomCard from "../CustomCard/CustomCard";
+import CustomCard from "../customCard/CustomCard";
 
 interface BlogPost {
   image: string;
@@ -31,7 +31,8 @@ export type CardType = "blogs-data" | "insight-update-data" | "case-study-data";
 const BlogWrap = () => {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [customCards, setCustomCards] = useState<CustomCardData[]>([]);
-  const [currentCategory, setCurrentCategory] = useState<CardType>("blogs-data");
+  const [currentCategory, setCurrentCategory] =
+    useState<CardType>("blogs-data");
   const [currentPage, setCurrentPage] = useState(1);
   const [isChanging, setIsChanging] = useState(false);
   const [slideDirection, setSlideDirection] = useState<"left" | "right">(

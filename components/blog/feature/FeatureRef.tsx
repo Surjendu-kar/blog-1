@@ -1,6 +1,6 @@
 "use client";
 import { FC, useEffect, useState } from "react";
-import CustomCard from "../CustomCard/CustomCard";
+import CustomCard from "../customCard/CustomCard";
 import { CardData } from "../CustomCard";
 interface FeatureRefData {
   value: {

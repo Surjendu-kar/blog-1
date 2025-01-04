@@ -1,8 +1,8 @@
 "use client";
 import { FC, useEffect, useState } from "react";
 import { builder } from "@builder.io/sdk";
-import CardContainer from "../CustomCard/CardContainer";
-import { CardData } from "../CustomCard";
+import CardContainer from "../customCard/CardContainer";
+import { CardData } from "../customCard";
 
 const CaseStudyCard: FC = () => {
   const [cards, setCards] = useState<CardData[]>([]);

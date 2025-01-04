@@ -6,7 +6,7 @@ import LightDark from "@/public/header-img/lightDark.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { builder } from "@builder.io/sdk";
-import Announcement from "../blog/Announcement/Announcement";
+import Announcement from "./Announcement";
 import { NavItem } from "./NavItem";
 import MobileMenu from "./MobileMenu";
 import { NavLink, NavLinkContent } from "@/types";
