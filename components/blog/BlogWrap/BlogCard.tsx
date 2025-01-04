@@ -65,6 +65,7 @@ const BlogCard = ({
               alt={post.title}
               className="object-cover rounded-lg"
               fill
+              loading="lazy"
               unoptimized={isExternalUrl(post.image)}
               loader={
                 isExternalUrl(post.image)

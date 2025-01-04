@@ -77,7 +77,7 @@ function Contact({
                   value={email}
                   onChange={handleEmailChange}
                   placeholder={emailPlaceholder}
-                  className={`pl-4 pr-4 sm:pr-20 text-[#000000] py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#00C7BE] focus:border-transparent w-full sm:w-auto ${
+                  className={`pl-4 sm:pr-20 text-[#000000] py-2 border rounded-sm focus:outline-none focus:ring-2 focus:ring-[#00C7BE] focus:border-transparent w-full sm:w-auto ${
                     !isValid && email ? "border-red-500" : "border-gray-300"
                   }`}
                 />

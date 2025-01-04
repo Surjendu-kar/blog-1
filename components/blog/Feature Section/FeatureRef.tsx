@@ -58,7 +58,7 @@ const FeatureRef: FC<FeatureRefProps> = ({
   if (!reference || reference.length === 0) {
     return <div>No references available.</div>;
   }
-  console.log(reference);
+
   return (
     <>
       {/* heading */}

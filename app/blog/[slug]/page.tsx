@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const resolvedParams = await params;
+  const resolvedParams = await params;  
 
   const [blogData, sectionContent] = await Promise.all([
     builder
@@ -60,6 +60,9 @@ export default async function BlogPostPage({ params }: PageProps) {
       })
       .promise() as Promise<SectionContent>,
   ]);
+  // console.log('blogData',blogData);
+  // console.log('sectionContent',sectionContent);
+
 
   if (!blogData || !sectionContent) {
     return (

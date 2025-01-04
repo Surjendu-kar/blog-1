@@ -15,12 +15,13 @@ const CustomCard: FC<CardProps> = ({ card }) => {
   return (
     <div className="group flex flex-col gap-3 sm:gap-4 rounded-lg bg-white w-full hover:shadow-lg transition-all duration-300">
       {/* Card Image */}
-      <div className="relative h-40 sm:h-44 sm:h-48 rounded-lg overflow-hidden">
+      <div className="relative h-40 sm:h-44 rounded-lg overflow-hidden">
         <Image
           src={card.image}
           alt={card.title}
           className="object-cover"
           fill
+          loading="lazy"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           unoptimized={isExternalUrl(card.image)}
           loader={
