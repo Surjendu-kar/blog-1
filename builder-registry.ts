@@ -1,14 +1,11 @@
 "use client";
 import { builder, Builder } from "@builder.io/react";
-import InsightUpdateCard from "./components/blog/feature/InsightUpdateCard";
-import CaseStudyCard from "./components/blog/feature/CaseStudyCard";
 import Contact from "./components/contact/Contact";
 import FAQ from "./components/blog/faq/FAQ";
 import Heading from "./components/blog/heading/Heading";
 import BlogWrap from "./components/blog/blogWrap/BlogWrap";
 import CategoryName from "./components/blog-post/CategoryName";
 import BlogDetail from "./components/blog-post/BlogDetails";
-import RelatedPost from "./components/blog-post/RelatedPost";
 import NewsletterSignup from "./components/blog-post/NewsletterSignup";
 import VideoBanner from "./components/blog-post/VideoBanner";
 import FeatureRef from "./components/blog/feature/FeatureRef";
@@ -16,7 +13,6 @@ import RelatedRef from "./components/blog-post/relatedPostRef/RelatedRef";
 import SocialInfo from "./components/blog-post/SocialInfo";
 import CategoryNav from "./components/blog/blogWrap/CategoryNav";
 import Pagination from "./components/blog/blogWrap/Pagination";
-
 
 builder.init(process.env.NEXT_PUBLIC_BUILDER_API_KEY!);
 
@@ -26,14 +22,6 @@ Builder.registerComponent(CategoryNav, {
 
 Builder.registerComponent(Pagination, {
   name: "Pagination",
-});
-
-Builder.registerComponent(InsightUpdateCard, {
-  name: "InsightUpdateCard",
-});
-
-Builder.registerComponent(CaseStudyCard, {
-  name: "CaseStudyCard",
 });
 
 Builder.registerComponent(Contact, {
@@ -202,50 +190,6 @@ Builder.registerComponent(BlogDetail, {
       type: "string",
       defaultValue: "16px",
       helperText: "Font size for the conclusion",
-    },
-  ],
-});
-
-Builder.registerComponent(RelatedPost, {
-  name: "RelatedPost",
-  inputs: [
-    {
-      name: "title",
-      type: "string",
-      defaultValue: "Unlocking AI's potential in AI Healthcare",
-      helperText: "The main title",
-    },
-    {
-      name: "description",
-      type: "string",
-      defaultValue:
-        "Our Ai Hackathons are intensive, collaborative sessions that spark Innovation",
-      helperText: "Description text below the title",
-    },
-    {
-      name: "authorImage",
-      type: "file",
-      allowedFileTypes: ["jpeg", "jpg", "png", "webp"],
-      defaultValue: "/blog-img/avatar.png",
-      helperText: "Author's profile image",
-    },
-    {
-      name: "authorName",
-      type: "string",
-      defaultValue: "Bernd Holbein",
-      helperText: "Author's name",
-    },
-    {
-      name: "tag",
-      type: "string",
-      defaultValue: "Insights",
-      helperText: "Category tag",
-    },
-    {
-      name: "readTime",
-      type: "string",
-      defaultValue: "12 mins",
-      helperText: "Estimated reading time",
     },
   ],
 });
