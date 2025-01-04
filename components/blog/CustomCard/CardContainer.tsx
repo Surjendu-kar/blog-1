@@ -1,7 +1,7 @@
 "use client";
 import { FC, useState } from "react";
-import CustomCard from "./CustomCard";
 import { CardContainerProps } from ".";
+import CustomCard from "./CustomCard";
 
 const CardContainer: FC<CardContainerProps> = ({ cards, cardType }) => {
   const [showAll, setShowAll] = useState<boolean>(false);
