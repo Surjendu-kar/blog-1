@@ -39,7 +39,7 @@ export async function generateStaticParams() {
 }
 
 export default async function BlogPostPage({ params }: PageProps) {
-  const resolvedParams = await params;  
+  const resolvedParams = await params;
 
   const [blogData, sectionContent] = await Promise.all([
     builder
@@ -47,6 +47,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         query: {
           "data.slug": resolvedParams.slug,
         },
+        enrich: true,
         cachebust: true,
       })
       .promise() as Promise<BlogData>,
@@ -56,13 +57,11 @@ export default async function BlogPostPage({ params }: PageProps) {
         query: {
           "data.slug": resolvedParams.slug,
         },
+        enrich: true,
         cachebust: true,
       })
       .promise() as Promise<SectionContent>,
   ]);
-  // console.log('blogData',blogData);
-  // console.log('sectionContent',sectionContent);
-
 
   if (!blogData || !sectionContent) {
     return (

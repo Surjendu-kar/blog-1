@@ -23,7 +23,13 @@ export function RenderBuilderContent({ content, model }: BuilderPageProps) {
   }
 
   if (content || isPreviewing) {
-    return <BuilderComponent content={content} model={model} />;
+    return (
+      <BuilderComponent
+        content={content}
+        options={{ enrich: true }}
+        model={model}
+      />
+    );
   }
 
   return <DefaultErrorPage statusCode={404} />;

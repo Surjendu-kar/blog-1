@@ -2,6 +2,7 @@
 import { FC, useEffect, useState } from "react";
 import CustomCard from "../customCard/CustomCard";
 import { CardData } from "../customCard";
+
 interface FeatureRefData {
   value: {
     value: {
@@ -16,6 +17,7 @@ interface FeatureRefData {
     };
   };
 }
+
 interface FeatureRefProps {
   reference?: FeatureRefData[];
   title?: string;
@@ -55,16 +57,14 @@ const FeatureRef: FC<FeatureRefProps> = ({
       window.removeEventListener("resize", checkMobile);
     };
   }, []);
-  if (!reference || reference.length === 0) {
-    return <div>No references available.</div>;
-  }
+ 
 
   return (
     <>
       {/* heading */}
       <div className="my-10 mx-auto">
         {subtitle && (
-          <p className="text-center text-sm text-[#00C7BE]">{subtitle}</p>
+          <p className="text-center text-sm text-[#00C7BE] ">{subtitle}</p>
         )}
         <h1
           className="font-bold text-[#000000]"
