@@ -65,6 +65,55 @@ export default Contact;
 
 Builder.registerComponent(FAQ, {
   name: "FAQ",
+  inputs: [
+    {
+      name: "subtitle",
+      type: "richText",
+      
+      helperText: "Optional subtitle text displayed above the title",
+      defaultValue: "Blog",
+      required: true,
+    },
+    {
+      name: "title",
+      type: "richText",
+      helperText: "Main title text",
+      defaultValue: "Frequently asked questions",
+      required: true,
+    },
+    {
+      name: "description",
+      type: "richText",
+      helperText: "Optional description text displayed below the title",
+      required: true,
+      defaultValue: "Explore to learn more about how Symbiofy can empower your business with AI-driven solutions.",
+    },
+    {
+      name: "faqItems",
+      type: "list",
+      subFields: [
+        {
+          name: "title",
+          type: "richText",
+          helperText: "The question text for this FAQ item",
+          required: true,
+        },
+        {
+          name: "description",
+          type: "richText",
+          helperText: "The answer text for this FAQ item",
+          required: true,
+        },
+      ],
+      helperText: "List of FAQ items to display",
+    },
+    {
+      name: "itemsToShow",
+      type: "number",
+      defaultValue: 4,
+      helperText: "Number of FAQ items to show before 'View all' button",
+    },
+  ],
 });
 
 Builder.registerComponent(Heading, {

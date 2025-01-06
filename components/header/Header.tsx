@@ -67,7 +67,7 @@ export default function Header() {
     <>
       <Announcement />
       <header className="bg-white w-full">
-        <div className="container flex p-4 justify-between w-full items-center">
+        <div className="flex p-4 justify-between w-full items-center">
           <div>
             <Link href="/">
               <Image
