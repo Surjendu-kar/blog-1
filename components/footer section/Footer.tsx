@@ -25,12 +25,11 @@ async function Footer() {
                 key={section.id ?? "default-key"}
                 className="flex flex-col space-y-3 md:space-y-4 col-span-1"
               >
-                <a
-                  href={section.data?.url ?? "#"}
-                  className="text-black font-bold text-base md:text-lg hover:text-gray-700 transition-colors duration-200"
+                <p
+                  className="text-black font-bold text-base md:text-lg"
                 >
                   {section.name}
-                </a>
+                </p>
                 <div className="flex flex-col space-y-2 md:space-y-3">
                   {section.data?.subItems?.map((item, index) => (
                     <a

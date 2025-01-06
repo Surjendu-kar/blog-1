@@ -41,7 +41,6 @@ export interface SubItem {
 export interface FooterData {
   heading: string;
   subItems: SubItem[];
-  url: string;
 }
 
 export interface CustomBuilderContent extends BuilderContent {
